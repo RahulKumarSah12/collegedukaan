@@ -5,7 +5,7 @@ const dotenv = require("dotenv")
 const checkandSignup = require("./controllers/checkandSignup");
 const {checkToken} = require("./middleware/checkToken.js");
 const {checkUserExists} = require("./middleware/checkUserLogin.js")
-const {redirectToProductPage} = require("./controllers/product.js")
+// const {redirectToProductPage} = require("./controllers/myProduct.js")
 const {login} = require('./controllers/loginUser')
 const { default: mongoose } = require("mongoose");
 const {createSeller} = require("./controllers/sellerslist.js");
@@ -17,7 +17,9 @@ app.use(express.static(path.join(__dirname, "ecomproject")));
 app.use(express.json());
 
 dotenv.config()
-console.log(process.env.URL);
+const dbs = {userdb : process.env.URL,sellersdb: process.env.SELLERSDB}
+
+console.log(process.env.SELLERSDB);
 //const url = "mongodb://127.0.0.1:27017/collegesellproduct";
 mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log("DB Connected");
@@ -36,7 +38,7 @@ app.post("/signup", checkandSignup);
 app.post("/login",checkUserExists,login);
 app.post("/createSeller",createSeller);
 app.post("/checkSeller",checkSeller);
-app.post("/product",checkToken,redirectToProductPage);
+// app.post("/myproduct",checkToken,redirectToProductPage);
 app.post("/allproducts",checkToken,uploadToAllProducts);
 
 

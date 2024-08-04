@@ -6,6 +6,7 @@ async function uploadToAllProducts(req, res) {
     const { name,description,price,stock } = req.body;
     console.log(req.body);
     const result = await Allproduct.findOne({ name,description,price });
+    console.log(result);
     if (result) {
       console.log("the product already exists");
       return res.json({

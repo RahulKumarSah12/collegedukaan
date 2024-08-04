@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 // Secret key for JWT
-const JWT_SECRET = 'your_jwt_secret_key'; // Store this in environment variables
+const JWT_SECRET = 'thesecret'; // Store this in environment variables
 
 // Login controller function
 async function login(req, res) {
