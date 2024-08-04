@@ -1,0 +1,45 @@
+<div class="container">
+    <form [formGroup]="createAccountForm" (ngSubmit)="onSubmit()">
+      <h2>Create Account</h2>
+      
+      <div>
+        <label for="name">Your name:</label>
+        <input id="name" formControlName="name" />
+        <div *ngIf="createAccountForm.get('name')?.invalid && createAccountForm.get('name')?.touched">
+          <small *ngIf="createAccountForm.get('name')?.errors?.['required']">This field is required.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" />
+        <div *ngIf="createAccountForm.get('email')?.invalid && createAccountForm.get('email')?.touched">
+          <small *ngIf="createAccountForm.get('email')?.errors?.['required']">This field is required.</small>
+          <small *ngIf="createAccountForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" formControlName="password" />
+        <div *ngIf="createAccountForm.get('password')?.invalid && createAccountForm.get('password')?.touched">
+          <small *ngIf="createAccountForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="createAccountForm.get('password')?.errors?.['minlength']">Minimum 6 characters required.</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="confirmPassword">Password again:</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+        <div *ngIf="createAccountForm.get('confirmPassword')?.invalid && createAccountForm.get('confirmPassword')?.touched">
+          <small *ngIf="createAccountForm.get('confirmPassword')?.errors?.['required']">Password confirmation is required.</small>
+          <small *ngIf="createAccountForm.get('confirmPassword')?.errors?.['mismatch']">Passwords must match.</small>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="createAccountForm.invalid">Submit</button>
+      
+      <p class="login-link">Already a user? <a routerLink="/login">Login</a></p>
+    </form>
+  </div>
+  

@@ -1,0 +1,33 @@
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2>Sign In</h2>
+      
+      <div>
+        <label for="contactInfo">Email or mobile phone number:</label>
+        <input 
+          id="contactInfo" 
+          formControlName="contactInfo" 
+          (keypress)="restrictContactInfo($event)" 
+          maxlength="50" 
+        />
+        <div *ngIf="loginForm.get('contactInfo')?.invalid && loginForm.get('contactInfo')?.touched">
+          <small *ngIf="loginForm.get('contactInfo')?.errors?.['required']">This field is required. </small>
+          <small *ngIf="loginForm.get('contactInfo')?.errors?.['invalidContactInfo']">Invalid email or phone number (must be 10 digits for phone).</small>
+        </div>
+      </div>
+  
+      <div>
+        <label for="password">Password:</label>
+        <input id="password" type="password" formControlName="password" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Minimum 6 characters required.</small>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Submit</button>
+      
+      <p class="new-user-link">New user? <a routerLink="/create-account">Create your account</a></p>
+    </form>
+  </div>
+  

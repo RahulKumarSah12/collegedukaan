@@ -1,0 +1,106 @@
+/* Apply the Roboto font globally */
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  /* Center the form on the page */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    // background: #f0f2f5;
+    padding: 20px;
+  }
+  
+  /* Style the form */
+  form {
+    background: #fff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  /* Style the heading */
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Style form fields */
+  form div {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Style error messages */
+  small {
+    color: red;
+    font-size: 12px;
+  }
+  
+  /* Style the submit button */
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: #18579a;
+  }
+  
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Style the new user link */
+  .new-user-link, .login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .new-user-link a, .login-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .new-user-link a:hover, .login-link a:hover {
+    text-decoration: underline;
+  }
+  
