@@ -10,6 +10,7 @@ const {login} = require('./controllers/loginUser')
 const { default: mongoose } = require("mongoose");
 const {createSeller} = require("./controllers/sellerslist.js");
 const checkSeller = require("./controllers/checkSeller.js");
+const { uploadToAllProducts } = require("./controllers/allProducts.js");
 const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, "ecomproject")));
@@ -36,6 +37,7 @@ app.post("/login",checkUserExists,login);
 app.post("/createSeller",createSeller);
 app.post("/checkSeller",checkSeller);
 app.post("/product",checkToken,redirectToProductPage);
+app.post("/allproducts",checkToken,uploadToAllProducts);
 
 
 app.listen(9000, () => {
