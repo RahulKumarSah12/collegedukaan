@@ -3,7 +3,14 @@
       <h1>Welcome to CollegeDukaan!</h1>
     </div>
     <div class="navbar-right">
-      <button (click)="openModal()">Sell Product</button>
+      <button (click)="openModal()">
+        <ng-container *ngIf="isAlreadySeller; else becomeSeller">
+            Add Product & Sell
+          </ng-container>
+          <ng-template #becomeSeller>
+            Become a Seller
+          </ng-template>
+      </button>
       <div class="profile-dropdown">
         <img src="assets/profile-icon.png" alt="Profile Icon" class="profile-icon" (click)="toggleDropdown()">
         <div class="dropdown-content" *ngIf="dropdownOpen">

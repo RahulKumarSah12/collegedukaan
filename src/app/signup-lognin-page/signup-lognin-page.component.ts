@@ -45,6 +45,25 @@ export class SignupLogninPageComponent {
           const email = this.loginForm.get('contactInfo')?.value;
           localStorage.setItem('userEmail', email); // Store email in local storage
           this.route.navigate(['main-page']); // Navigate to main-page on success
+
+
+          // Call the makeSeller API to check if the seller exists
+          this.myService.checkSeller({ email }).subscribe(
+            sellerResponse => {
+              console.log('Seller check response:', sellerResponse);
+              if (sellerResponse.exist) {
+                localStorage.setItem('isAlreadySeller', sellerResponse.exist ? 'true' : 'false');
+                console.log('Seller already exist.');
+              } else {
+                localStorage.setItem('isAlreadySeller', sellerResponse.exist ? 'true' : 'false');
+                console.log('Seller does not exist.');
+              }
+            },
+            sellerError => {
+              console.error('Error checking seller status:', sellerError);
+              // Handle errors from the makeSeller API
+            }
+          );
         },
         error => {
           console.error('Error:', error);

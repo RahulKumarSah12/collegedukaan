@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignupCreateAccountService } from '../signup-create-account.service';
@@ -8,13 +8,28 @@ import { SignupCreateAccountService } from '../signup-create-account.service';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
 
-
-  constructor(private route: Router, private myService: SignupCreateAccountService) {}
-  
   dropdownOpen = false;
   modalVisible = false;
+  isAlreadySeller = false;
+
+  constructor(private route: Router, private myService: SignupCreateAccountService) { }
+
+  ngOnInit(): void {
+    console.log(localStorage.getItem('isAlreadySeller'));
+    if(localStorage.getItem('isAlreadySeller')){
+      this.isAlreadySeller = true;
+    }
+    else if(localStorage.getItem('isAlreadySeller') == null ){
+      this.checkSeller();
+    }
+    else{
+      this.isAlreadySeller = false;
+    }
+    
+  }
+
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -25,6 +40,8 @@ export class MainPageComponent {
   }
 
   logout() {
+    localStorage.clear();
+    sessionStorage.clear();
     this.route.navigate(['login']);
   }
 
@@ -56,21 +73,49 @@ export class MainPageComponent {
   // Handle "Make Me a Seller" button click
   makeMeASeller(): void {
     const email = localStorage.getItem('userEmail');
-
     if (email) {
       this.myService.makeSeller({ email }).subscribe(
         response => {
           console.log('Seller request successful:', response);
           this.closeModal(); // Close the modal on success
+          this.isAlreadySeller = true;
+          localStorage.setItem('isAlreadySeller', 'true');
           this.route.navigate(['main-page']); // Redirect or take any other action on success
         },
         error => {
           console.error('Error:', error);
+          this.isAlreadySeller = false;
+          
         }
       );
     } else {
+      this.isAlreadySeller = false;
       console.error('No email found in local storage.');
     }
   }
-  
+
+  checkSeller() {
+    const email = localStorage.getItem('userEmail');
+    // Call the makeSeller API to check if the seller exists
+    this.myService.checkSeller({ email }).subscribe(
+      sellerResponse => {
+        console.log('Seller check response:', sellerResponse);
+        if (sellerResponse.exist) {
+          this.isAlreadySeller = true;
+          console.log('Seller already exist.');
+        } else {
+          this.isAlreadySeller = false;
+          console.log('Seller does not exist.');
+        }
+      },
+      sellerError => {
+        this.isAlreadySeller = false;
+        console.error('Error checking seller status:', sellerError);
+        // Handle errors from the makeSeller API
+      }
+    );
+  }
+
+
+
 }
