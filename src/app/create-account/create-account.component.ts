@@ -29,6 +29,8 @@ export class CreateAccountComponent {
       this.myService.createAccount(this.createAccountForm.value).subscribe(
         (response: any) => {
           console.log('Account Created:', response);
+          const email = this.createAccountForm.get('email')?.value;
+          localStorage.setItem('userEmail', email); // Store email in local storage
           this.createAccountForm.reset(); // Reset all the input fields
         },
         (error: any) => {

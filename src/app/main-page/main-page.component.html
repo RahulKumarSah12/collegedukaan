@@ -1,1 +1,23 @@
-<p>main-page works!</p>
+<nav class="navbar">
+    <div class="navbar-left">
+      <h1>Welcome to CollegeDukaan!</h1>
+    </div>
+    <div class="navbar-right">
+      <button (click)="openModal()">Sell Product</button>
+      <div class="profile-dropdown">
+        <img src="assets/profile-icon.png" alt="Profile Icon" class="profile-icon" (click)="toggleDropdown()">
+        <div class="dropdown-content" *ngIf="dropdownOpen">
+          <a (click)="viewProfile()">Profile</a>
+          <a (click)="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+<!-- Modal Background -->
+<div class="modal-background" *ngIf="modalVisible" (click)="closeModal()"></div>
+
+<!-- Modal Content -->
+<div class="modal-content" *ngIf="modalVisible">
+    <button type="submit" class="MakeMeASeller" (click)="makeMeASeller()">Make Me a Seller</button>
+</div>

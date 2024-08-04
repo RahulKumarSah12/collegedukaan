@@ -42,6 +42,8 @@ export class SignupLogninPageComponent {
       this.myService.signIn(this.loginForm.value).subscribe(
         response => {
           console.log('User Signed In:', response);
+          const email = this.loginForm.get('contactInfo')?.value;
+          localStorage.setItem('userEmail', email); // Store email in local storage
           this.route.navigate(['main-page']); // Navigate to main-page on success
         },
         error => {

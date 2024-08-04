@@ -25,6 +25,8 @@ export class SignupCreateAccountService {
     );
   }
 
-
-
+  makeSeller(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/sellersList`, data);
+  }
+  
 }
