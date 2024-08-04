@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Sample Form</title>
+  </head>
+  <body>
+    <div id="sampleid">
+    <h2>Sample Form</h2>
+    <!-- Form starts here -->
+    <form id="myForm" onsubmit="handleSubmit(event)">
+      <!-- Text input -->
+      <label for="name" class="texts ele">Name:</label><br />
+      <input  type="text" id="name" class="ele" name="name" required /><br />
+      <label for="password" class="texts ele levpass">Password:</label><br />
+      <input type="text" id="password" class="ele" name="password" required /><br />
+
+      <!-- Submit button -->
+      <input type="submit" class="button" value="Submit" />
+    </form>
+    <!-- Form ends here -->
+    </div>
+
+    <!-- Placeholder for greeting message -->
+    <div id="greetingMessage"></div>
+
+    <!-- Script to handle form submission -->
+    <script src="/script.js"></script>
+  </body>
+</html>

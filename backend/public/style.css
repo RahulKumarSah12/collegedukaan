@@ -1,0 +1,99 @@
+body {
+  background-color: aquamarine;
+  font-family: "Noto Sans JP", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("https://img.freepik.com/premium-photo/abstract-planet-earth-with-particles-connected-shell-with-lines-global-network-connection-science-technology-3d-rendering_634443-1098.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#sampleid{
+  position: absolute;
+  right: 100px;
+  top:80px;
+}
+
+h2 {
+  position: relative;
+  left: 100px;
+  font-size: xx-large;
+  color: #0DFFFF;
+}
+
+form {
+  width: 400px;
+  height: 400px;
+  padding: 10px;
+  background-color: #ffffff1b;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
+
+.texts{
+  color: aquamarine;
+  position: relative;
+  left: 60px;
+}
+
+
+#password{
+  background-color: #90cccc66;
+  width:250px ;
+  border-radius: 4px;
+  position: relative;
+  left: 60px;
+  top: 100px;
+}
+#name{
+  background-color: #90cccc66;
+  width: 250px;
+  border-radius: 4px;
+  position: relative;
+  left: 60px;
+}
+
+.ele{
+  position: relative;
+  top: 50px;
+}
+
+.levpass{
+  position: relative;
+  top: 100px;
+}
+.button {
+  background-color: #0dffff86;
+  color: white;
+  padding: 2px 6px;
+  position: relative;
+  left: 150px;
+  top:200px;
+  font-size: 16px;
+  border-radius: 10px;
+  width: fit-content;
+  display: block;
+}
+
+.msg {
+  padding: 2em;
+  background-color: #ffffff74;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
+
+.success {
+  padding: 1em;
+  background-color: #0DFFFF;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
+
+.error {
+  padding: 1em;
+  background-color: #ff1111;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+}
