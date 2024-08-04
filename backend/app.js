@@ -8,6 +8,7 @@ const {checkUserExists} = require("./middleware/checkUserLogin.js")
 const {redirectToProductPage} = require("./controllers/product.js")
 const {login} = require('./controllers/loginUser')
 const { default: mongoose } = require("mongoose");
+const sellersList = require("./controllers/sellerslist.js");
 const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, "ecomproject")));
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 
 app.post("/signup", checkandSignup);
 app.post("/login",checkUserExists,login);
+app.post("/sellersList",sellersList);
 app.post("/product",checkToken,redirectToProductPage);
 
 
