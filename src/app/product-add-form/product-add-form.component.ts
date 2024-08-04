@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignupCreateAccountService } from '../signup-create-account.service';
 
 @Component({
   selector: 'app-product-add-form',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class ProductAddFormComponent {
   productForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private myService: SignupCreateAccountService) {
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
@@ -25,9 +26,26 @@ export class ProductAddFormComponent {
 
   onSubmit(): void {
     if (this.productForm.valid) {
-      console.log('Product Form Value:', this.productForm.value);
-      // Handle form submission, e.g., save the product data
+      const productData = this.productForm.value;
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        console.error('No authentication token found');
+        return;
+      }
+      this.myService.addProduct(token,productData).subscribe(
+        response => {
+          console.log('Product added successfully:', response);
+          // Handle successful response
+        },
+        error => {
+          console.error('Error adding product:', error);
+          // Handle error response
+        }
+      );
+    } else {
+      console.log('Form is invalid');
     }
+  
   }
 
   goBack(): void {

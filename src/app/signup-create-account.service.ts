@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
@@ -28,9 +28,19 @@ export class SignupCreateAccountService {
   makeSeller(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/createSeller`, data);
   }
-  
+
   checkSeller(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/checkSeller`, data);
+  }
+
+  addProduct(token: string, productData: { name: string, description: string, price: number, stock: number }): Observable<any> {
+    // Create headers with the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Make the HTTP POST request
+    return this.http.post(`${this.apiUrl}/allproducts`, productData, { headers });
   }
 
 }
