@@ -31,4 +31,8 @@ export class SignupCreateAccountService {
     return this.http.post(`${this.apiUrl}/allproducts`, productData);
   }
 
+  getproducts(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getproducts`);
+  }
+
 }
