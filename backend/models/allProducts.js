@@ -21,7 +21,7 @@ const allProductSchema = new mongoose.Schema({
   }
 });
 
-const Allproduct = new mongoose.model("Allproducts", allProductSchema);
+const Allproduct = new mongoose.model("Allproduct", allProductSchema);
 
-module.exports = Allproduct;
+module.exports = {Allproduct};
 //{name: 'Shoe', description: 'Good shoe very good', price: 100, stock: 2}

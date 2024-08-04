@@ -1,45 +1,46 @@
 const { Allproduct } = require("../models/allProducts");
 
 async function uploadToAllProducts(req, res) {
-    //{name: 'Shoe', description: 'Good shoe very good', price: 100, stock: 2}
   try {
-    const { name,description,price,stock } = req.body;
+    const { name, description, price, stock } = req.body;
     console.log(req.body);
-    const result = await Allproduct.findOne({ name,description,price });
-    console.log(result);
-    if (result) {
-      console.log("the product already exists");
+
+    // Check if the product already exists
+    const existingProduct = await Allproduct.findOne({ name, description, price });
+    if (existingProduct) {
+      console.log("The product already exists");
       return res.json({
         exist: 1,
+        msg: "Product already exists",
+        success: false,
       });
+    }
 
-      //    return res.json({
-      //     msg:"You are already a seller!",
-      //     success: True
-      //   });
-    } else {
-      try {
-        const newAllproduct = new Allproduct({
-            name,description,price,stock
-        });
+    // Create and save a new product if it doesn't exist
+    try {
+      const newProduct = new Allproduct({ name, description, price, stock });
+      await newProduct.save();
 
-        await newAllproduct.save();
-
-        return res.status(201).json({
-          msg: "product Successfully Created",
-          exist: 0,
-          success: true,
-          user: newSeller,
-        });
-      } catch (err) {
-        console.log("err occ ", err);
-      }
+      return res.status(201).json({
+        msg: "Product successfully created",
+        exist: 0,
+        success: true,
+        product: newProduct,
+      });
+    } catch (err) {
+      console.log("Error occurred while saving the product:", err);
+      return res.status(500).json({
+        msg: "Error saving the product",
+        success: false,
+      });
     }
   } catch (err) {
-    console.log("error here");
+    console.log("Error occurred while checking the product:", err);
+    return res.status(500).json({
+      msg: "Error checking the product",
+      success: false,
+    });
   }
 }
 
-//checkandSignup("newuser1","kmewrvmvp")
-
-module.exports = {uploadToAllProducts};
+module.exports = { uploadToAllProducts };
