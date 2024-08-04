@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors');
 const path = require("path");
+const dotenv = require("dotenv")
 const checkandSignup = require("./controllers/checkandSignup");
 const {checkToken} = require("./middleware/checkToken.js");
 const {checkUserExists} = require("./middleware/checkUserLogin.js")
@@ -12,8 +13,10 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "ecomproject")));
 app.use(express.json());
 
-const url = "mongodb://127.0.0.1:27017/collegesellproduct";
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+dotenv.config()
+console.log(process.env.URL);
+//const url = "mongodb://127.0.0.1:27017/collegesellproduct";
+mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log("DB Connected");
 });
 
