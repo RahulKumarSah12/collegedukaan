@@ -5,7 +5,7 @@
     <div class="navbar-right">
       <button (click)="openModal()">
         <ng-container *ngIf="isAlreadySeller; else becomeSeller">
-            Add Product & Sell
+            <a class="addproductform" [routerLink]="['/product-add-form']">Add Product & Sell</a>
           </ng-container>
           <ng-template #becomeSeller>
             Become a Seller

@@ -11,6 +11,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { SignupCreateAccountService } from './signup-create-account.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ProductAddFormComponent } from './product-add-form/product-add-form.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
          SignupLogninPageComponent,
          CreateAccountComponent,
          MainPageComponent,
+         ProductAddFormComponent,
   ],
   imports: [
     BrowserModule,
