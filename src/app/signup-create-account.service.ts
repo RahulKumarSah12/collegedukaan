@@ -16,13 +16,7 @@ export class SignupCreateAccountService {
   }
 
   signIn(loginData: { contactInfo: string, password: string }): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, loginData).pipe(
-      tap(response => {
-        if (response && response.token) {
-          localStorage.setItem('authToken', response.token); // Store the token
-        }
-      })
-    );
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData)
   }
 
   makeSeller(data: any): Observable<any> {
@@ -33,14 +27,8 @@ export class SignupCreateAccountService {
     return this.http.post(`${this.apiUrl}/checkSeller`, data);
   }
 
-  addProduct(token: string, productData: { name: string, description: string, price: number, stock: number }): Observable<any> {
-    // Create headers with the token
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    // Make the HTTP POST request
-    return this.http.post(`${this.apiUrl}/allproducts`, productData, { headers });
+  addProduct(productData: { name: string, description: string, price: number, stock: number }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/allproducts`, productData);
   }
 
 }
