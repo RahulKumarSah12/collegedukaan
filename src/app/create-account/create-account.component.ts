@@ -29,6 +29,7 @@ export class CreateAccountComponent {
       this.myService.createAccount(this.createAccountForm.value).subscribe(
         (response: any) => {
           console.log('Account Created:', response);
+          this.createAccountForm.reset(); // Reset all the input fields
         },
         (error: any) => {
           console.error('Error:', error);
