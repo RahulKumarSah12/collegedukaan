@@ -1,34 +1,31 @@
-const {Sellers} = require("../models/sellersDb");
+const { Sellers } = require("../models/sellersDb");
 
-async function sellersList(req, res) {
+async function createSeller(req, res) {
   try {
-    const {email} = req.body;
+    const { email } = req.body;
 
-    
-    const result = await Sellers.findOne({email});
+    const result = await Sellers.findOne({ email });
     if (result) {
+      console.log("there is user");
+      return res.json({
+        exist: 1,
+      });
 
-        console.log("there is user");
-        return res.json({
-            exist:1
-        })
-
-    //    return res.json({
-    //     msg:"You are already a seller!",
-    //     success: True
-    //   });
+      //    return res.json({
+      //     msg:"You are already a seller!",
+      //     success: True
+      //   });
     } else {
       try {
         const newSeller = new Sellers({
-          email
+          email,
         });
 
         await newSeller.save();
 
-
         return res.status(201).json({
-          msg:"User Successfully Created",
-          exist:0,
+          msg: "User Successfully Created",
+          exist: 0,
           success: true,
           user: newSeller,
         });
@@ -43,4 +40,4 @@ async function sellersList(req, res) {
 
 //checkandSignup("newuser1","kmewrvmvp")
 
-module.exports = sellersList;
+module.exports = {createSeller};
