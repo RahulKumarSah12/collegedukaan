@@ -27,13 +27,12 @@ export class ProductAddFormComponent {
   onSubmit(): void {
     if (this.productForm.valid) {
       const productData = this.productForm.value;
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        console.error('No authentication token found');
-        return;
-      }
-      this.myService.addProduct(token,productData).subscribe(
+      
+      this.myService.addProduct(productData).subscribe(
         response => {
+          if(response.msg == "Product already exists"){
+            return ;
+          }
           console.log('Product added successfully:', response);
           // Handle successful response
         },

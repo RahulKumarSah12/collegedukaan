@@ -3,12 +3,12 @@
       <h1>Welcome to CollegeDukaan!</h1>
     </div>
     <div class="navbar-right">
-      <button (click)="openModal()">
+      <button>
         <ng-container *ngIf="isAlreadySeller; else becomeSeller">
             <a class="addproductform" [routerLink]="['/product-add-form']">Add Product & Sell</a>
           </ng-container>
           <ng-template #becomeSeller>
-            Become a Seller
+            <a class="becomeseller" (click)="openModal()">Become a Seller</a>
           </ng-template>
       </button>
       <div class="profile-dropdown">
