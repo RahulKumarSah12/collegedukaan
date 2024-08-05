@@ -13,10 +13,12 @@ export class MainPageComponent implements OnInit {
   dropdownOpen = false;
   modalVisible = false;
   isAlreadySeller = false;
+  products: any[] = []; // Array to store products
 
   constructor(private route: Router, private myService: SignupCreateAccountService) { }
 
   ngOnInit(): void {
+    this.AllProduct();
     console.log(localStorage.getItem('isAlreadySeller'));
     if(localStorage.getItem('isAlreadySeller')){
       this.isAlreadySeller = true;
@@ -112,6 +114,19 @@ export class MainPageComponent implements OnInit {
         this.isAlreadySeller = false;
         console.error('Error checking seller status:', sellerError);
         // Handle errors from the makeSeller API
+      }
+    );
+  }
+
+  
+  AllProduct(){
+    this.myService.getproducts().subscribe(
+     Response => {
+      this.products = Response.products; // Store the products
+      console.log(this.products); 
+      },
+      Error => {
+        console.log(Error);
       }
     );
   }

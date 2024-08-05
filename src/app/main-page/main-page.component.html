@@ -28,3 +28,29 @@
 <div class="modal-content" *ngIf="modalVisible">
     <button type="submit" class="MakeMeASeller" (click)="makeMeASeller()">Make Me a Seller</button>
 </div>
+
+
+<div class="products-list">
+    <h2>Product List</h2>
+  
+    <!-- Products Display -->
+    <div *ngIf="products.length > 0; else noProducts">
+      <div class="product-grid">
+        <div *ngFor="let product of products" class="product-card">
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="product-description">{{ product.description }}</p>
+            <p class="product-price">Price: <span>{{ product.price | currency:'INR':'symbol':'1.2-2' }}</span></p>
+            <p class="product-stock">Stock: <span>{{ product.stock }}</span></p>
+          </div>
+          <button class="buy-now-button">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- No Products Found -->
+    <ng-template #noProducts>
+      <p>No products available.</p>
+    </ng-template>
+  </div>
+  

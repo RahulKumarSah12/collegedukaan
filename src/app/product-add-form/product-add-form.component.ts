@@ -34,6 +34,7 @@ export class ProductAddFormComponent {
             return ;
           }
           console.log('Product added successfully:', response);
+          this.router.navigate(['/main-page'])
           // Handle successful response
         },
         error => {
