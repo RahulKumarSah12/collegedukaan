@@ -1,47 +1,108 @@
 const express = require("express");
-const cors = require('cors');
+const multer = require('multer');
+const cors = require("cors");
 const path = require("path");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
 const checkandSignup = require("./controllers/checkandSignup");
-const {checkToken} = require("./middleware/checkToken.js");
-const {checkUserExists} = require("./middleware/checkUserLogin.js")
+const { checkToken } = require("./middleware/checkToken.js");
+const Image = require('./models/image.js')
+const { checkUserExists } = require("./middleware/checkUserLogin.js");
+const otpRoutes = require("./otp/otpRoutes.js");
 // const {redirectToProductPage} = require("./controllers/myProduct.js")
-const {login} = require('./controllers/loginUser')
+const { login } = require("./controllers/loginUser");
 const { default: mongoose } = require("mongoose");
-const {createSeller} = require("./controllers/sellerslist.js");
+const { createSeller } = require("./controllers/sellerslist.js");
 const checkSeller = require("./controllers/checkSeller.js");
 const { uploadToAllProducts } = require("./controllers/allProducts.js");
 const { getAllProducts } = require("./controllers/getallprod.js");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 const app = express();
 app.use(cors());
+app.use("/", otpRoutes);
 app.use(express.static(path.join(__dirname, "ecomproject")));
 app.use(express.json());
 
-dotenv.config()
-const dbs = {userdb : process.env.URL,sellersdb: process.env.SELLERSDB}
+dotenv.config();
+//const dbs = { userdb: process.env.URL, sellersdb: process.env.SELLERSDB };
 
-console.log(process.env.SELLERSDB);
+//console.log(process.env.SELLERSDB);
 //const url = "mongodb://127.0.0.1:27017/collegesellproduct";
-mongoose.connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-  console.log("DB Connected");
-});
+mongoose
+  .connect(process.env.URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("DB Connected");
+  });
 
 app.get("/", (req, res) => {
-  const filePath = path.join(
-    __dirname,
-    "ecomproject",
-    "index.html"
-  );
+  const filePath = path.join(__dirname, "ecomproject", "index.html");
   res.sendFile(filePath);
 });
 
 app.post("/signup", checkandSignup);
-app.post("/login",checkUserExists,login);
-app.post("/createSeller",createSeller);
-app.post("/checkSeller",checkSeller);
+app.post("/login", checkUserExists, login);
+app.post("/createSeller", createSeller);
+app.post("/checkSeller", checkSeller);
 // app.post("/myproduct",checkToken,redirectToProductPage);
-app.post("/allproducts",checkToken,uploadToAllProducts);
-app.get("/getproducts",checkToken,getAllProducts);
+app.post("/allproducts",upload.single('image'), checkToken, uploadToAllProducts,async (req, res) => {
+  try {
+    const newImage = new Image({
+      data: req.file.buffer,
+      contentType: req.file.mimetype,
+    });
+    await newImage.save();
+    res.status(201).send('Image uploaded successfully');
+  } catch (error) {
+    res.status(500).send('Error uploading image');
+  }
+});
+app.get("/getproducts", checkToken, getAllProducts,async (req, res) => {
+  try {
+    const images = await Image.find({});
+    const base64Images = images.map(img => ({
+      _id: img._id,
+      contentType: img.contentType,
+      data: img.data.toString('base64') // Convert buffer to Base64 string
+    }));
+    res.status(200).json(base64Images);
+  } catch (error) {
+    res.status(500).send('Error retrieving images');
+  }
+});
+
+
+// app.post('/upload', upload.single('image'), async (req, res) => {
+//   try {
+//     const newImage = new Image({
+//       data: req.file.buffer,
+//       contentType: req.file.mimetype,
+//     });
+//     await newImage.save();
+//     res.status(201).send('Image uploaded successfully');
+//   } catch (error) {
+//     res.status(500).send('Error uploading image');
+//   }
+// });
+
+// app.get('/images', async (req, res) => {
+//     try {
+//       const images = await Image.find({});
+//       const base64Images = images.map(img => ({
+//         _id: img._id,
+//         contentType: img.contentType,
+//         data: img.data.toString('base64') // Convert buffer to Base64 string
+//       }));
+//       res.status(200).json(base64Images);
+//     } catch (error) {
+//       res.status(500).send('Error retrieving images');
+//     }
+//   });
+
+
+
+
+
+
 
 
 app.listen(9000, () => {
