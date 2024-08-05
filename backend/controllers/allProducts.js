@@ -2,11 +2,11 @@ const { Allproduct } = require("../models/allProducts");
 
 async function uploadToAllProducts(req, res) {
   try {
-    const { name, description, price, stock } = req.body;
+    const { name, description, price, collegeName, location } = req.body;
     console.log(req.body);
 
     // Check if the product already exists
-    const existingProduct = await Allproduct.findOne({ name, description, price });
+    const existingProduct = await Allproduct.findOne({ name, description, price, collegeName, location });
     if (existingProduct) {
       console.log("The product already exists");
       return res.json({
@@ -18,7 +18,7 @@ async function uploadToAllProducts(req, res) {
 
     // Create and save a new product if it doesn't exist
     try {
-      const newProduct = new Allproduct({ name, description, price, stock });
+      const newProduct = new Allproduct({ name, description, price, collegeName, location });
       await newProduct.save();
 
       return res.status(201).json({

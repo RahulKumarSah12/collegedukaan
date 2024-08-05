@@ -1,134 +1,154 @@
-
-/* General form styling */
-.container{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* General styling for the form container */
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Styling for the form container */
 .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid rgba(176, 206, 248, 0.324);
-    box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  /* Header styling */
-  h2 {
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  /* Styling for form groups */
-  .form-group {
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  /* Styling for form group with inline elements */
-  .inline-group {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  /* Styling for inline form group items */
-  .form-group-inline {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Styling for input fields */
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  /* Styling for textarea */
-  textarea {
-    min-height: 100px;
-    resize: vertical;
-  }
-  
-  /* Error messages styling */
-  .error-message {
-    color: red;
-    font-size: 12px;
-  }
-  
-  /* Button styling */
-  button[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background: #007bff;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  button[type="submit"]:hover {
-    background: #0056b3;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid rgba(176, 206, 248, 0.324);
+  box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+  max-width: 800px;
+  width: 100%;
+}
 
-  .button-container button{
-    width: 45%;
-  }
-  
-  button[type="button"] {
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    color: #ffffff;
-  }
-  
-  button.go-back {
-    background-color: #6c757d; /* Dark gray */
-  }
-  
-  button.go-back:hover {
-    background-color: #5a6268; /* Slightly darker gray */
-  }
-  
-  button.my-products {
-    background-color: #28a745; /* Green */
-  }
-  
-  button.my-products:hover {
-    background-color: #218838; /* Darker green */
-  }
-  
+/* Header styling */
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
 
-  input:focus, textarea:focus{
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  }
+/* Styling for form rows to align Product Name, Price, and Description */
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Ensure content wraps if necessary */
+}
+
+/* Styling for individual form groups */
+.form-group {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+/* Styling for description group */
+.description-group {
+  flex: 2;
+  margin-bottom: 20px;
+}
+
+/* Styling for labels */
+label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+  display: block;
+}
+
+/* Styling for input fields and textarea */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Ensuring textarea height matches input fields */
+textarea {
+  resize: none;
+  height: 50px; /* Adjusted height to match input fields */
+}
+
+/* Error messages styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Button styling */
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #0056b3;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.button-container button {
+  width: 45%;
+}
+
+button[type="button"] {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: #ffffff;
+}
+
+button.go-back {
+  background-color: #6c757d; /* Dark gray */
+}
+
+button.go-back:hover {
+  background-color: #5a6268; /* Slightly darker gray */
+}
+
+button.my-products {
+  background-color: #28a745; /* Green */
+}
+
+button.my-products:hover {
+  background-color: #218838; /* Darker green */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+/* Styling for select dropdown with custom arrow */
+select {
+  appearance: none;
+}
+
+/* Adjust padding to ensure text does not overlap with the arrow */
+

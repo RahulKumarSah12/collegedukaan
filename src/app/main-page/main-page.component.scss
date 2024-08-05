@@ -142,87 +142,133 @@
   }
   
   h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     font-size: 2em;
     color: #333;
+
   }
   
-  .error-message {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.2em;
-  }
+/* General container styling */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  // background-color: #f0f4f8; /* Light grey-blue background */
+}
+
+/* Styling for each product card */
+.product-card {
+  background: #ffffff;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #e0e0e0; /* Light border for separation */
+}
+
+/* Hover effect for product card */
+.product-card:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Styling for product information */
+.product-info {
+  margin-bottom: 20px;
+}
+
+.product-info h3 {
+  margin-bottom: 15px;
+  font-size: 22px; /* Larger font size */
+  color: #333; /* Dark color for readability */
+}
+
+.product-description {
+  font-size: 14px;
+  color: #666; /* Lighter color for description */
+  margin-bottom: 15px;
+}
+
+.product-price,
+.product-college,
+.product-location {
+  margin: 10px 0;
+}
+
+.product-price span,
+.product-college span,
+.product-location span {
+  font-weight: 600; /* Bold text for emphasis */
+  color: #333; /* Consistent color for emphasis */
+}
+
+/* Stylish button */
+.buy-now-button {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background */
+  color: #ffffff;
+  border: none;
+  border-radius: 25px; /* Fully rounded corners */
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
+}
+
+.buy-now-button:hover {
+  background: linear-gradient(135deg, #0056b3, #003d7a); /* Darker gradient on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Styling for "No products available" message */
+ng-template p {
+  text-align: center;
+  color: #777;
+  font-size: 18px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+
+
   
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .product-card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    text-align: center;
-    padding: 15px;
-    position: relative;
-  }
-  
-  .product-card:hover {
-    transform: translateY(-10px);
-  }
-  
-  .product-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 2px solid #eee;
-  }
-  
-  .product-info {
-    padding: 10px 0;
-  }
-  
-  .product-info h3 {
-    margin: 10px 0;
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .product-description {
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 10px;
-  }
-  
-  .product-price {
-    font-size: 1.2em;
-    color: #000;
-    margin-bottom: 10px;
-  }
-  
-  .product-stock {
-    font-size: 1em;
-    color: #777;
-  }
-  
-  .buy-now-button {
-    background-color: #28a745;
-    color: #fff;
+
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px;
+}
+
+.search-container input,.search-container button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.search-container button {
+    background-color: #007bff;
+    color: white;
     border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    bottom: 10px;
-  }
-  
-  .buy-now-button:hover {
-    background-color: #218838;
-  }
-  
+    padding: 10px 30px;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+}
+
+
+.search-container input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

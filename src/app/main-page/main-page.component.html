@@ -30,8 +30,15 @@
 </div>
 
 
+<div class="search-container">
+  <input type="text" placeholder="Enter product name">
+  <input type="text"  placeholder="Enter location">
+  <button >Search</button>
+</div>
+
+
 <div class="products-list">
-    <h2>Product List</h2>
+    <h2>Products Available Near You</h2>
   
     <!-- Products Display -->
     <div *ngIf="products.length > 0; else noProducts">
@@ -41,7 +48,8 @@
             <h3>{{ product.name }}</h3>
             <p class="product-description">{{ product.description }}</p>
             <p class="product-price">Price: <span>{{ product.price | currency:'INR':'symbol':'1.2-2' }}</span></p>
-            <p class="product-stock">Stock: <span>{{ product.stock }}</span></p>
+            <p class="product-college">College: <span>{{ product.collegeName }}</span></p>
+            <p class="product-location">Location: <span>{{ product.location }}</span></p>
           </div>
           <button class="buy-now-button">Buy Now</button>
         </div>

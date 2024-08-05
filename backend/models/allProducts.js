@@ -15,8 +15,12 @@ const allProductSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  stock: {
-    type: Number,
+  collegeName: {
+    type: String,
+    required: true,
+  },
+  location: {
+    type: String,
     required: true,
   }
 });
