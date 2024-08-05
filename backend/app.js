@@ -15,6 +15,7 @@ const { createSeller } = require("./controllers/sellerslist.js");
 const checkSeller = require("./controllers/checkSeller.js");
 const { uploadToAllProducts } = require("./controllers/allProducts.js");
 const { getAllProducts } = require("./controllers/getallprod.js");
+const { Allproduct } = require("./models/allProducts.js");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const app = express();
@@ -44,9 +45,12 @@ app.post("/login", checkUserExists, login);
 app.post("/createSeller", createSeller);
 app.post("/checkSeller", checkSeller);
 // app.post("/myproduct",checkToken,redirectToProductPage);
-app.post("/allproducts",upload.single('image'), checkToken, uploadToAllProducts,async (req, res) => {
+app.post("/allproducts",upload.single('image'),  checkToken, async (req, res) => {
+         
   try {
-    const newImage = new Image({
+        console.log(req.file.buffer)
+        uploadToAllProducts(req,res);
+       const newImage = new Image({
       data: req.file.buffer,
       contentType: req.file.mimetype,
     });
@@ -56,19 +60,44 @@ app.post("/allproducts",upload.single('image'), checkToken, uploadToAllProducts,
     res.status(500).send('Error uploading image');
   }
 });
-app.get("/getproducts", checkToken, getAllProducts,async (req, res) => {
+
+app.get('/getproducts', async (req, res) => {
   try {
-    const images = await Image.find({});
-    const base64Images = images.map(img => ({
-      _id: img._id,
-      contentType: img.contentType,
-      data: img.data.toString('base64') // Convert buffer to Base64 string
-    }));
-    res.status(200).json(base64Images);
+      const products = await Allproduct.find({});
+
+      const productsWithBase64Images = products.map(product => {
+          const base64Image = product.image ? Buffer.from(product.image).toString('base64') : null;
+          return {
+              name: product.name,
+              description: product.description,
+              price: product.price,
+              collegeName: product.collegeName,
+              location: product.location,
+              image: base64Image
+          };
+      });
+
+      res.json(productsWithBase64Images);
   } catch (error) {
-    res.status(500).send('Error retrieving images');
+      res.status(500).json({ error: 'An error occurred' });
   }
 });
+
+//donot use this this is just a reference
+// app.get("/getproducts", checkToken, getAllProducts,async (req, res) => {
+//   try {
+//     const allfields = await Allproduct.find({});
+//     const images = await Image.find({});
+//     const base64Images = images.map(img => ({
+//       _id: img._id,
+//       contentType: img.contentType,
+//       data: img.data.toString('base64') // Convert buffer to Base64 string
+//     }));
+//     res.status(200).json(base64Images);
+//   } catch (error) {
+//     res.status(500).send('Error retrieving images');
+//   }
+// });
 
 
 // app.post('/upload', upload.single('image'), async (req, res) => {

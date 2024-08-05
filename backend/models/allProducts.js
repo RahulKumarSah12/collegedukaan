@@ -22,6 +22,10 @@ const allProductSchema = new mongoose.Schema({
   location: {
     type: String,
     required: true,
+  },
+  image:{
+    type: Buffer,
+    required: true
   }
 });
 
