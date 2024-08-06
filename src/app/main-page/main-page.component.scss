@@ -208,20 +208,19 @@
 
 /* Stylish button */
 .buy-now-button {
-  background: linear-gradient(135deg, #007bff, #0056b3); /* Gradient background */
-  color: #ffffff;
-  border: none;
-  border-radius: 25px; /* Fully rounded corners */
-  padding: 12px 25px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
+    width: 50%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .buy-now-button:hover {
-  background: linear-gradient(135deg, #0056b3, #003d7a); /* Darker gradient on hover */
-  transform: scale(1.05); /* Slightly larger on hover */
+  background: #18579a;
 }
 
 /* Styling for "No products available" message */

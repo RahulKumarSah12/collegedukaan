@@ -45,21 +45,7 @@ app.post("/login", checkUserExists, login);
 app.post("/createSeller", createSeller);
 app.post("/checkSeller", checkSeller);
 // app.post("/myproduct",checkToken,redirectToProductPage);
-app.post("/allproducts",upload.single('image'),  checkToken, async (req, res) => {
-         
-  try {
-        console.log(req.file.buffer)
-        uploadToAllProducts(req,res);
-       const newImage = new Image({
-      data: req.file.buffer,
-      contentType: req.file.mimetype,
-    });
-    await newImage.save();
-    res.status(201).send('Image uploaded successfully');
-  } catch (error) {
-    res.status(500).send('Error uploading image');
-  }
-});
+app.post("/allproducts",upload.single('image'),  checkToken, uploadToAllProducts);
 
 app.get('/getproducts', async (req, res) => {
   try {

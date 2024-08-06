@@ -27,12 +27,8 @@ export class SignupCreateAccountService {
     return this.http.post(`${this.apiUrl}/checkSeller`, data);
   }
 
-  addProduct(productData: { name: string, description: string, price: number, collegeName: string, location: string, image?: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/allproducts`, productData, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    });
+  addProduct(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}/allproducts`, formData);
   }
 
   getproducts(): Observable<any> {
