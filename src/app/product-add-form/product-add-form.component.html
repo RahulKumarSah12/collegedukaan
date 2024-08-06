@@ -57,7 +57,7 @@
       <!-- Image Upload -->
       <div class="form-group">
         <label for="image">Upload Image:</label>
-        <input id="image" formControlName="image" type="file" accept="image/*" (change)="onFileChange($event)" />
+        <input id="image" type="file" accept="image/*" (change)="onFileChange($event)" />
         <div *ngIf="productForm.get('image')?.invalid && productForm.get('image')?.touched" class="error-message">
           <small *ngIf="productForm.get('image')?.errors?.['required']">Image is required.</small>
         </div>

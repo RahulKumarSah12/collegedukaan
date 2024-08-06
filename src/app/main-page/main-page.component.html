@@ -44,6 +44,9 @@
     <div *ngIf="products.length > 0; else noProducts">
       <div class="product-grid">
         <div *ngFor="let product of products" class="product-card">
+          <div class="product-image">
+            <img [src]="'data:image/jpeg;base64,' + product.image" alt="{{ product.name }}" />
+          </div>
           <div class="product-info">
             <h3>{{ product.name }}</h3>
             <p class="product-description">{{ product.description }}</p>

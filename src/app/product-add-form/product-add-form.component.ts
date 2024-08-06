@@ -99,17 +99,52 @@ export class ProductAddFormComponent {
         
   }
 
+  // onSubmit(): void {
+  //   if (this.productForm.valid) {
+  //     const productData = this.productForm.value;
+  //     console.log(productData);
+      
+  //     this.myService.addProduct(productData).subscribe(
+  //       response => {
+  //         if(response.msg == "Product already exists"){
+  //           return ;
+  //         }
+  //         console.log('Product added successfully:', response);
+  //         this.router.navigate(['/main-page'])
+  //         // Handle successful response
+  //       },
+  //       error => {
+  //         console.error('Error adding product:', error);
+  //         // Handle error response
+  //       }
+  //     );
+  //   } else {
+  //     console.log('Form is invalid');
+  //   }
+  
+  // }
+
+
+
   onSubmit(): void {
     if (this.productForm.valid) {
       const productData = this.productForm.value;
-      
+      console.log(productData);  
+  
+      // Ensure that the image data is in Base64 format
+      if (!productData.image.startsWith('data:image/')) {
+        productData.image = `data:image/jpeg;base64,${productData.image}`;
+        console.error('Invalid image format');
+        return;
+      }
+  
       this.myService.addProduct(productData).subscribe(
         response => {
-          if(response.msg == "Product already exists"){
-            return ;
+          if(response.msg === "Product already exists"){
+            return;
           }
           console.log('Product added successfully:', response);
-          this.router.navigate(['/main-page'])
+          this.router.navigate(['/main-page']);
           // Handle successful response
         },
         error => {
@@ -120,8 +155,8 @@ export class ProductAddFormComponent {
     } else {
       console.log('Form is invalid');
     }
-  
   }
+  
 
   goBack(): void {
     this.router.navigate(['/main-page']); // Adjust this path based on your routing
@@ -132,14 +167,35 @@ export class ProductAddFormComponent {
   }
 
 
+  // onFileChange(event: Event): void {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files[0]) {
+  //     this.productForm.patchValue({
+  //       image: input.files[0]
+  //     });
+  //     this.productForm.get('image')?.updateValueAndValidity();
+  //   }
+  // }
+
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
-      this.productForm.patchValue({
-        image: input.files[0]
-      });
-      this.productForm.get('image')?.updateValueAndValidity();
+      const file = input.files[0];
+      const reader = new FileReader();
+  
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target && e.target.result) {
+          const base64String = e.target.result as string;
+          // Set the base64 string to the form control or product data
+          this.productForm.get('image')?.setValue(base64String);
+        }
+      };
+  
+      reader.readAsDataURL(file);
     }
   }
+
+  
+
 
 }

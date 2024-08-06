@@ -122,7 +122,9 @@ export class MainPageComponent implements OnInit {
   AllProduct(){
     this.myService.getproducts().subscribe(
      Response => {
-      this.products = Response.products; // Store the products
+      console.log(Response);
+      this.products = Response; // Store the products
+      console.log("Rahul");
       console.log(this.products); 
       },
       Error => {
