@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignupCreateAccountService } from '../signup-create-account.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-add-form',
@@ -12,7 +13,7 @@ export class ProductAddFormComponent {
   productForm!: FormGroup;
   colleges: string[] = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private myService: SignupCreateAccountService) {
+  constructor(private fb: FormBuilder, private router: Router, private myService: SignupCreateAccountService, private snackBar: MatSnackBar) {
 
   }
 
@@ -30,71 +31,71 @@ export class ProductAddFormComponent {
         // Fetch or set the list of colleges (static example here)
         this.colleges = [
           // Indian Institutes of Technology (IITs)
-          'Indian Institute of Technology (IIT) Bombay',
-          'Indian Institute of Technology (IIT) Delhi',
-          'Indian Institute of Technology (IIT) Kanpur',
-          'Indian Institute of Technology (IIT) Kharagpur',
-          'Indian Institute of Technology (IIT) Madras',
-          'Indian Institute of Technology (IIT) Roorkee',
-          'Indian Institute of Technology (IIT) Guwahati',
-          'Indian Institute of Technology (IIT) Hyderabad',
-          'Indian Institute of Technology (IIT) Jodhpur',
-          'Indian Institute of Technology (IIT) Patna',
-          'Indian Institute of Technology (IIT) Ropar',
-          'Indian Institute of Technology (IIT) Bhubaneswar',
-          'Indian Institute of Technology (IIT) Gandhinagar',
-          'Indian Institute of Technology (IIT) Mandi',
-          'Indian Institute of Technology (IIT) (ISM) Dhanbad',
-          'Indian Institute of Technology (IIT) Varanasi',
-          'Indian Institute of Technology (IIT) Palakkad',
-          'Indian Institute of Technology (IIT) Tirupati',
-          'Indian Institute of Technology (IIT) Bhilai',
-          'Indian Institute of Technology (IIT) Dharwad',
-          'Indian Institute of Technology (IIT) Jammu',
+          'IIT Bombay',
+          'IIT Delhi',
+          'IIT Kanpur',
+          'IIT Kharagpur',
+          'IIT Madras',
+          'IIT Roorkee',
+          'IIT Guwahati',
+          'IIT Hyderabad',
+          'IIT Jodhpur',
+          'IIT Patna',
+          'IIT Ropar',
+          'IIT Bhubaneswar',
+          'IIT Gandhinagar',
+          'IIT Mandi',
+          'IIT ISM Dhanbad',
+          'IIT Varanasi',
+          'IIT Palakkad',
+          'IIT Tirupati',
+          'IIT Bhilai',
+          'IIT Dharwad',
+          'IIT Jammu',
         
           // National Institutes of Technology (NITs)
-          'National Institute of Technology (NIT) Warangal',
-          'National Institute of Technology (NIT) Trichy',
-          'National Institute of Technology (NIT) Surathkal',
-          'National Institute of Technology (NIT) Rourkela',
-          'National Institute of Technology (NIT) Calicut',
-          'National Institute of Technology (NIT) Durgapur',
-          'National Institute of Technology (NIT) Kurukshetra',
-          'National Institute of Technology (NIT) Jamshedpur',
-          'National Institute of Technology (NIT) Silchar',
-          'National Institute of Technology (NIT) Hamirpur',
-          'National Institute of Technology (NIT) Meghalaya',
-          'National Institute of Technology (NIT) Puducherry',
-          'National Institute of Technology (NIT) Arunachal Pradesh',
-          'National Institute of Technology (NIT) Delhi',
-          'National Institute of Technology (NIT) Mizoram',
-          'National Institute of Technology (NIT) Sikkim',
-          'National Institute of Technology (NIT) Agartala',
-          'National Institute of Technology (NIT) Jalandhar',
-          'National Institute of Technology (NIT) Rourkela',
-          'National Institute of Technology (NIT) Uttarakhand',
+          'NIT Warangal',
+          'NIT Trichy',
+          'NIT Surathkal',
+          'NIT Rourkela',
+          'NIT Calicut',
+          'NIT Durgapur',
+          'NIT Kurukshetra',
+          'NIT Jamshedpur',
+          'NIT Silchar',
+          'NIT Hamirpur',
+          'NIT Meghalaya',
+          'NIT Puducherry',
+          'NIT Arunachal Pradesh',
+          'NIT Delhi',
+          'NIT Mizoram',
+          'NIT Sikkim',
+          'NIT Agartala',
+          'NIT Jalandhar',
+          'NIT Rourkela',
+          'NIT Uttarakhand',
         
           // Indian Institutes of Information Technology (IIITs)
-          'Indian Institute of Information Technology (IIIT) Allahabad',
-          'Indian Institute of Information Technology (IIIT) Bangalore',
-          'Indian Institute of Information Technology (IIIT) Design and Manufacturing, Kancheepuram',
-          'Indian Institute of Information Technology (IIIT) Hyderabad',
-          'Indian Institute of Information Technology (IIIT) Jabalpur',
-          'Indian Institute of Information Technology (IIIT) Kalyani',
-          'Indian Institute of Information Technology (IIIT) Kota',
-          'Indian Institute of Information Technology (IIIT) Lucknow',
-          'Indian Institute of Information Technology (IIIT) Manipur',
-          'Indian Institute of Information Technology (IIIT) Mangalore',
-          'Indian Institute of Information Technology (IIIT) Raichur',
-          'Indian Institute of Information Technology (IIIT) Pune',
-          'Indian Institute of Information Technology (IIIT) Sri City',
-          'Indian Institute of Information Technology (IIIT) Una',
-          'Indian Institute of Information Technology (IIIT) Vadodara',
-          'Indian Institute of Information Technology (IIIT) Chittoor',
-          'Indian Institute of Information Technology (IIIT) Surat',
-          'Indian Institute of Information Technology (IIIT) Dharwad',
-          'Indian Institute of Information Technology (IIIT) Bhopal',
-          'Indian Institute of Information Technology (IIIT) Design and Manufacturing, Kancheepuram'
+          'IIIT Allahabad',
+          'IIIT Bangalore',
+          'IIIT Design and Manufacturing, Kancheepuram',
+          'IIIT Hyderabad',
+          'IIIT Jabalpur',
+          'IIIT Kalyani',
+          'IIIT Kota',
+          'IIIT Lucknow',
+          'IIIT Manipur',
+          'IIIT Mangalore',
+          'IIIT Raichur',
+          'IIIT Pune',
+          'IIIT Sri City',
+          'IIIT Una',
+          'IIIT Vadodara',
+          'IIIT Chittoor',
+          'IIIT Surat',
+          'IIIT Dharwad',
+          'IIIT Bhopal',
+          'IIIT Kancheepuram'
         ];
         
   }
@@ -123,13 +124,28 @@ export class ProductAddFormComponent {
       this.myService.addProduct(formData).subscribe(
         response => {
           if (response.msg == "Product already exists") {
+            this.snackBar.open('Product already exists!', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'right', // Position horizontally
+              verticalPosition: 'top' // Position vertically
+            });
             return;
           }
           console.log('Product added successfully:', response);
+          this.snackBar.open('Product added successfully!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right', // Position horizontally
+            verticalPosition: 'top' // Position vertically
+          });
           this.router.navigate(['main-page']);
         },
         error => {
           console.error('Error adding product:', error);
+          this.snackBar.open('Error adding product', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right', // Position horizontally
+            verticalPosition: 'top' // Position vertically
+          });
         }
       );
     } else {

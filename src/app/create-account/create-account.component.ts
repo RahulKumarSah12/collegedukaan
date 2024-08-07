@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SignupCreateAccountService } from '../signup-create-account.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-account',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class CreateAccountComponent {
   createAccountForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private myService: SignupCreateAccountService, private route: Router) {
+
+  constructor(private fb: FormBuilder, private myService: SignupCreateAccountService, private route: Router, private snackBar: MatSnackBar) {
     this.createAccountForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -30,6 +32,11 @@ export class CreateAccountComponent {
       this.myService.createAccount(this.createAccountForm.value).subscribe(
         (response: any) => {
           console.log('Account Created:', response);
+          this.snackBar.open('Account created successfully. Login with same email id and password!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right', // Position horizontally
+            verticalPosition: 'top' // Position vertically
+          });
           const email = this.createAccountForm.get('email')?.value;
           localStorage.setItem('userEmail', email); // Store email in local storage
           this.createAccountForm.reset(); // Reset all the input fields
@@ -37,6 +44,11 @@ export class CreateAccountComponent {
         },
         (error: any) => {
           console.error('Error:', error);
+          this.snackBar.open('Account with the same email id is already created!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right', // Position horizontally
+            verticalPosition: 'top' // Position vertically
+          });
         }
       );
     }

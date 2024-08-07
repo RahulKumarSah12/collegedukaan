@@ -31,14 +31,33 @@
 
 
 <div class="search-container">
-  <input type="text" placeholder="Enter product name">
-  <input type="text"  placeholder="Enter location">
-  <button >Search</button>
+  <input type="text" [(ngModel)]="productName" (ngModelChange)="onInputChange()"  placeholder="Enter product name" />
+  <input type="text" [(ngModel)]="collegeName" (ngModelChange)="onInputChange()" placeholder="Enter college name" />
+  <!-- <button (click)="searchProducts()">Search</button> -->
 </div>
 
 
+<div class="carousel">
+  <div class="carousel-track-container" #carouselTrackContainer>
+    <ul class="carousel-track" #carouselTrack>
+      <li class="carousel-slide" *ngFor="let product of products1" (click)="onProductClick(product)">
+        {{ product}}
+      </li>
+      <li class="carousel-slide" *ngFor="let product of products1" (click)="onProductClick(product)">
+        {{ product}}
+      </li> <!-- Duplicate items for smooth loop -->
+    </ul>
+  </div>
+</div>
+
+
+
 <div class="products-list">
+  <div class="header-container">
     <h2>Products Available Near You</h2>
+    <button class="all-products-button" (click)="AllProduct()">All Products</button>
+  </div>
+
   
     <!-- Products Display -->
     <div *ngIf="products.length > 0; else noProducts">
@@ -46,23 +65,33 @@
         <div *ngFor="let product of products" class="product-card">
           <div class="product-image">
             <img [src]="'data:image/jpeg;base64,' + product.image" alt="{{ product.name }}" />
-            <!-- <img src="{{ product.image }}" alt="" /> -->
           </div>
           <div class="product-info">        
-            <h3>{{ product.name }}</h3>
-            <!-- <p class="product-description">{{ product.description }}</p> -->
-            <p class="product-price">Price: <span>{{ product.price | currency:'INR':'symbol':'1.2-2' }}</span></p>
-            <p class="product-college">College: <span>{{ product.collegeName }}</span></p>
-            <!-- <p class="product-location">Location: <span>{{ product.location }}</span></p> -->
+            <h3>{{ product.name | titleCase }}</h3>
+            <p class="product-price">
+              <!-- <i class="fas fa-tag"></i> -->
+              <span>{{ product.price | currency:'INR':'symbol':'1.2-2' }}</span>
+            </p>
+            <p class="product-college">
+              <!-- <i class="fas fa-university"></i> -->
+              <span>{{ product.collegeName }}</span>
+            </p>
+            <button class="buy-now-button">Buy Now</button> 
           </div>
-          <button class="buy-now-button">Buy Now</button> 
         </div>
       </div>
     </div>
+    
   
     <!-- No Products Found -->
     <ng-template #noProducts>
       <p>No products available.</p>
     </ng-template>
   </div>
+
+
+
+  <app-loader *ngIf="isLoading"></app-loader>
+
+
   

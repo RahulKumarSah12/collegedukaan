@@ -12,6 +12,12 @@ import { AuthInterceptor } from './auth.interceptor';
 import { SignupCreateAccountService } from './signup-create-account.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ProductAddFormComponent } from './product-add-form/product-add-form.component';
+import { CapitalizePipe } from './capitalize.pipe';
+import { TitleCasePipe } from './title-case.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +27,19 @@ import { ProductAddFormComponent } from './product-add-form/product-add-form.com
          CreateAccountComponent,
          MainPageComponent,
          ProductAddFormComponent,
+         CapitalizePipe,
+         TitleCasePipe,
+         LoaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule 
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
 
 
   ],

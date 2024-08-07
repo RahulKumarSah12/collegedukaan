@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignupCreateAccountService } from '../signup-create-account.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup-lognin-page',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class SignupLogninPageComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private myService: SignupCreateAccountService, private route: Router) {
+  constructor(private fb: FormBuilder, private myService: SignupCreateAccountService, private route: Router, private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({
       contactInfo: ['', [Validators.required, this.emailOrPhoneValidator]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -42,6 +43,11 @@ export class SignupLogninPageComponent {
       this.myService.signIn(this.loginForm.value).subscribe(
         response => {
           console.log('User Signed In:', response);
+          this.snackBar.open('Login successful!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right', // Position horizontally
+            verticalPosition: 'top' // Position vertically
+          });
           const email = this.loginForm.get('contactInfo')?.value;
           localStorage.setItem('userEmail', email); // Store email in local storage
           localStorage.setItem('authToken', response.token); // Store token in local storage
@@ -68,10 +74,19 @@ export class SignupLogninPageComponent {
         },
         error => {
           console.error('Error:', error);
+          this.snackBar.open('Please enter correct email and password!', 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right', // Position horizontally
+            verticalPosition: 'top' // Position vertically
+          });
         }
       );
     }
   }
   
+
+  showSnackbar(): void {
+    this.snackBar.open('Snackbar is working!', 'Close', { duration: 3000 });
+  }
   
 }

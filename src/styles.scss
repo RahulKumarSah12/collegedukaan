@@ -6,7 +6,49 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; /* or any other theme */
+
+
+
 
 body{
     background-color: #f0f4f8;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* loader.component.css */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9); /* Light background for better visibility */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it appears on top */
+  }
+  
+  .spinner-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  mat-spinner {
+    color: #007bff; /* Primary color, can be customized */
+  }
+  
+  p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
