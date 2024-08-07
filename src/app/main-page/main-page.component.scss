@@ -402,3 +402,11 @@ ng-template p {
     transform: translateX(-50%);
   }
 }
+
+
+.carousel-slide:hover {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  /* Add other styles as needed */
+}

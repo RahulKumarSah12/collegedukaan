@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from './loader/loader.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { LoaderComponent } from './loader/loader.component';
          CapitalizePipe,
          TitleCasePipe,
          LoaderComponent,
+         ProfileComponent,
   ],
   imports: [
     BrowserModule,
