@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { loadTranslations } from '@angular/localize';
 
 @Component({
   selector: 'app-profile',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
 
+  onClick(){
+    const email = localStorage.getItem('userEmail');
+  }
 }

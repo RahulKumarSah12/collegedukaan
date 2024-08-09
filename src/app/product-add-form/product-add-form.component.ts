@@ -114,7 +114,7 @@ export class ProductAddFormComponent {
       formData.append('location', this.productForm.get('location')?.value);
 
       if(sellerEmail){
-        formData.append('sellerEmail', sellerEmail);
+        formData.append('email', sellerEmail);
       }
 
       // Append file
