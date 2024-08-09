@@ -24,7 +24,7 @@ async function checkSeller(req, res) {
           msg:"Not a Seller.",
           exist:0,
           success: true,
-          user: newSeller,
+          user: "new Seller found",
         });
       } catch (err) {
         console.log("err occ ", err);
