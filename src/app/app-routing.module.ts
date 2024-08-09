@@ -4,6 +4,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { SignupLogninPageComponent } from './signup-lognin-page/signup-lognin-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ProductAddFormComponent } from './product-add-form/product-add-form.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: SignupLogninPageComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'create-account', component: CreateAccountComponent },
   { path: 'main-page', component: MainPageComponent },
   { path: 'product-add-form', component: ProductAddFormComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo: '/login' }
 ];
 

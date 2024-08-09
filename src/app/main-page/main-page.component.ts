@@ -75,7 +75,7 @@ export class MainPageComponent implements OnInit {
   }
 
   viewProfile() {
-    // Implement profile viewing logic
+    this.route.navigate(['profile']);
   }
 
   logout() {
