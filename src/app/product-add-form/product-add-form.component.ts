@@ -101,6 +101,7 @@ export class ProductAddFormComponent {
   }
 
   onSubmit(): void {
+    const sellerEmail = localStorage.getItem('userEmail');
     if (this.productForm.valid) {
       const formData = new FormData();
       console.log(this.productForm.value);
@@ -111,6 +112,10 @@ export class ProductAddFormComponent {
       formData.append('price', this.productForm.get('price')?.value.toString());
       formData.append('collegeName', this.productForm.get('collegeName')?.value);
       formData.append('location', this.productForm.get('location')?.value);
+
+      if(sellerEmail){
+        formData.append('sellerEmail', sellerEmail);
+      }
 
       // Append file
       const imageFile = this.productForm.get('image')?.value;
