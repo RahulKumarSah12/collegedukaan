@@ -48,13 +48,13 @@ app.post("/signup", checkandSignup);
 app.post("/login", checkUserExists, login);
 app.post("/createSeller", createSeller);
 app.post("/checkSeller", checkSeller);
-app.post("/addProductToSeller", checkToken, addProductToSeller);
-app.post("/getallMyProducts", checkToken, getAllMyProducts);
+// app.post("/addProductToSeller", addProductToSeller);
+app.post("/getallMyProducts",checkToken, getAllMyProducts);
 // app.post("/myproduct",checkToken,redirectToProductPage);
 app.post(
   "/allproducts",
   upload.single("image"),
-  checkToken,
+  
   uploadToAllProducts
 );
 

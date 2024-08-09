@@ -38,24 +38,26 @@ async function createSeller(req, res) {
   }
 }
 
-async function addProductToSeller(req, res) {
-  const { email,productNew } = req.body;
-  const result = await Sellers.findOne({ email });
-  if (!result) {
-    console.log(`There is no such seller like ${email} in seller list`);
-    return res.json(`No seller as ${email}`);
-  } else {
-    try {
-      await Sellers.findOneAndUpdate(
-        { email: clientMailId }, // Filter criteria
-        { $push: { products: productNew } } // Update operation
-      );
-      res.status(201).json("product added successfully. ");
-    } catch (err) {
-      console.log("error adding product to particular sellers list. ", err);
-    }
-  }
-}
+// async function addProductToSeller(req, res) {
+//   const {  name, description, price, collegeName, location, image  } = req.body;
+//   const image = req.file.buffer
+//   console.log(email);
+//   const result = await Sellers.findOne({ email });
+//   if (!result) {
+//     console.log(`There is no such seller like ${email} in seller list`);
+//     return res.json(`No seller as ${email}`);
+//   } else {
+//     try {
+//       await Sellers.findOneAndUpdate(
+//         { email: email }, // Filter criteria
+//         { $push: { products: productNew } } // Update operation
+//       );
+//       res.status(201).json("product added successfully. ");
+//     } catch (err) {
+//       console.log("error adding product to particular sellers list. ", err);
+//     }
+//   }
+// }
 
 async function getAllMyProducts(req, res) {
   try {
@@ -63,16 +65,19 @@ async function getAllMyProducts(req, res) {
     const {email} = req.body
     const theSeller = await Sellers.find({email});
 
-    const allMyProducts = theSeller.products
+    //console.log(theSeller[0]);
+
+    const allMyProducts = theSeller[0].products
+    console.log((theSeller));
     
     // Check if there are no products
-    if (allMyProducts.length === 0) {
-      return res.status(404).json({
-        msg: "No products found",
-        success: false,
-        products: []
-      });
-    }
+    // if(allMyProducts.length == 0) {
+    //   return res.status(404).json({
+    //     msg: "No products found",
+    //     success: false,
+    //     products: []
+    //   });
+    // }
     
     // Return the list of products
     res.status(200).json({
@@ -91,4 +96,4 @@ async function getAllMyProducts(req, res) {
 
 //checkandSignup("newuser1","kmewrvmvp")
 
-module.exports = { createSeller, addProductToSeller,getAllMyProducts };
+module.exports = { createSeller, getAllMyProducts };

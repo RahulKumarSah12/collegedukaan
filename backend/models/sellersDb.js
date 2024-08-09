@@ -7,9 +7,16 @@ const sellerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  products: {
-    type: Array,
-  }
+  products:[
+    {
+      name: String,
+      description: String,
+      price: Number,
+      collegeName: String,
+      location: String,
+      image: String,
+    },
+  ]
 });
 
 const Sellers = new mongoose.model("Seller", sellerSchema);
