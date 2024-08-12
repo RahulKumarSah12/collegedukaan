@@ -1,3 +1,7 @@
+const dotenv = require("dotenv")
+dotenv.config()
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { Sellers } = require("../models/sellersDb");
 
 async function createSeller(req, res) {
@@ -17,9 +21,12 @@ async function createSeller(req, res) {
       //   });
     } else {
       try {
+           
         const newSeller = new Sellers({
           email,
         });
+
+        //const Sellerstoken = jwt.sign({ id: user._id, email: user.email }, process.env.SELLERS_TOKEN_SECRET, { expiresIn: '8h' });
 
         await newSeller.save();
 
@@ -28,6 +35,7 @@ async function createSeller(req, res) {
           exist: 0,
           success: true,
           user: newSeller,
+          sellerToken : token
         });
       } catch (err) {
         console.log("err occ ", err);
@@ -78,12 +86,18 @@ async function getAllMyProducts(req, res) {
     //     products: []
     //   });
     // }
+    const stringImageAllMyProducts = allMyProducts.map(product => {
+      return {
+          ...product, // Copy all fields
+          image: Buffer.from(product.image).toString('base64') // Convert image to base64
+      };
+  });
     
     // Return the list of products
     res.status(200).json({
       msg: "Products retrieved successfully",
       success: true,
-      allMyProducts
+      stringImageAllMyProducts
     });
   } catch (err) {
     console.log("Error retrieving products:", err);
