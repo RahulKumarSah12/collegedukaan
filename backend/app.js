@@ -49,7 +49,7 @@ app.post("/login", checkUserExists, login);
 app.post("/createSeller", createSeller);
 app.post("/checkSeller", checkSeller);
 // app.post("/addProductToSeller", addProductToSeller);
-app.post("/getallMyProducts", getAllMyProducts);   //checkToken,
+app.post("/getallMyProducts",checkToken, getAllMyProducts);   //checkToken,
 // app.post("/myproduct",checkToken,redirectToProductPage);
 app.post(
   "/allproducts",
