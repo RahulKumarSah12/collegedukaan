@@ -52,7 +52,8 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.AllProduct();
     console.log(localStorage.getItem('isAlreadySeller'));
-    if (localStorage.getItem('isAlreadySeller')) {
+    console.log(this.isAlreadySeller);
+    if (localStorage.getItem('isAlreadySeller')=='true') {
       this.isAlreadySeller = true;
     }
     else if (localStorage.getItem('isAlreadySeller') == null) {
@@ -75,7 +76,17 @@ export class MainPageComponent implements OnInit {
   }
 
   viewProfile() {
-    this.route.navigate(['profile']);
+    console.log(this.isAlreadySeller);
+    if(this.isAlreadySeller){
+      this.route.navigate(['profile']);
+    }
+    if(!this.isAlreadySeller){
+      this.snackBar.open("This is seller's profile, only appear when you are a seller!", 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right', // Position horizontally
+        verticalPosition: 'top' // Position vertically
+      });
+    }
   }
 
   logout() {
