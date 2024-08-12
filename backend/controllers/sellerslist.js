@@ -86,18 +86,15 @@ async function getAllMyProducts(req, res) {
     //     products: []
     //   });
     // }
-    const stringImageAllMyProducts = allMyProducts.map(product => {
-      return {
-          ...product, // Copy all fields
-          image: Buffer.from(product.image).toString('base64') // Convert image to base64
-      };
-  });
+    for(let i = 0; i<allMyProducts.length; i++){
+      allMyProducts[i].image = Buffer.from(allMyProducts[i].image).toString('base64')
+  }
     
     // Return the list of products
     res.status(200).json({
       msg: "Products retrieved successfully",
       success: true,
-      stringImageAllMyProducts
+      allMyProducts
     });
   } catch (err) {
     console.log("Error retrieving products:", err);
