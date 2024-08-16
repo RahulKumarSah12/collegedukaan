@@ -7,19 +7,11 @@ const allProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: String,
+    required: true,
+  },
   email: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  collegeName: {
     type: String,
     required: true,
   },
@@ -27,13 +19,12 @@ const allProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  image:{
-    type: Buffer,
-    required: true
-  }
+  products:  [{
+    type: mongoose.Schema.Types.ObjectId,
+  }]
+
 });
 
-const Allproduct = new mongoose.model("Allproduct", allProductSchema);
+const Product = new mongoose.model("Product", allProductSchema);
 
-module.exports = {Allproduct};
-//{name: 'Shoe', description: 'Good shoe very good', price: 100, stock: 2}
+module.exports = Product;

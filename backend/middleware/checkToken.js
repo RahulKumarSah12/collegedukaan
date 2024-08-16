@@ -14,6 +14,8 @@ function checkToken(req, res, next) {
       console.log("token invalid");
       return res.status(401).json({ message: 'Invalid token' });
     }
+
+
     console.log("token verified");
     req.user = decoded; // Store the decoded user info in the request object
     next();

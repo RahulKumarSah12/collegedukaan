@@ -3,8 +3,13 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const { nodemailer } = require("./nodemailer");
 const Otpbase = require("./otpmodel");
+const User = require("../models/User");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const Seller = require("../models/sellers");
 
-
+// Secret key for JWT
+const JWT_SECRET = 'thesecret'; // Store this in environment variables
 
 router.use(express.json());
 
@@ -29,27 +34,47 @@ router.post("/getOtp", async (req, res) => {
 });
 
 router.post("/checkOtp", async (req, res) => {
-    const { otp: userGivenOtp, email } = req.body;
-    try {
-        const user = await Otpbase.findOne({ email });
-        if (user) {
+    const { otp: userGivenOtp, email,phone,location,name } = req.body;
+    const x = await User.findOne({email})
+    console.log("here is the id type and id>>>>>",typeof(x._id),">>>>>",x._id);
+    if(x.role === "Seller"){
+        res.send("Already a Seller")}
+    else{
+        try{
+            const user = await Otpbase.findOne({ email });
+            if (user) {
             const serverStoredOtp = user.secret;
             const isValid = userGivenOtp === serverStoredOtp;
-
             if (isValid) {
                 console.log("OTP is valid!");
-                return res.status(201).json("OTP is valid");
-            } else {
-                console.log("Invalid OTP.");
-                return res.status(400).json("OTP is Invalid");
-            }
-        } else {
-            return res.status(400).json("Invalid OTP");
+                await User.findOneAndUpdate(
+                    { email}, 
+                    { $set: { role: 'Seller' } },
+                  )
+                  const Sellertoken = jwt.sign({ id: user._id, role : user.role,email: user.email }, JWT_SECRET, { expiresIn: '8h' });
+
+                  const newSeller= new Seller({
+                    name,
+                    email,
+                    phone,
+                    location
+                  });
+          
+                  await newSeller.save();
+                    
+                return res.status(201).json({msg : "Seller Created",Sellertoken});
+                }}
+            else {
+                    console.log("Invalid OTP.");
+                    return res.status(400).json("OTP is Invalid");
+                }
+        }catch(err){
+                console.log("Unable to create Seller ",err );
         }
-    } catch (err) {
-        console.log("Something went wrong", err);
-        return res.status(500).json("Internal server error");
-    }
+    }           
+                
+         
+    
 });
 
 module.exports = router
