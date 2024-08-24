@@ -167,7 +167,7 @@ export class ProductAddFormComponent {
   }
 
   viewMyProducts(): void {
-    this.router.navigate(['/my-products']); // Adjust this path based on your routing
+    this.router.navigate(['/profile']); // Adjust this path based on your routing
   }
 
   onFileChange(event: Event): void {

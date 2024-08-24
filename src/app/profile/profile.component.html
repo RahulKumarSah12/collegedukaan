@@ -16,14 +16,13 @@
     <div class="products">
       <h2>My Products</h2>
       <ul>
-        <li *ngFor="let product of products">
+        <li *ngFor="let product of productsWithImages">
           <div class="product-image">
-            <img [src]="product.image" alt="{{ product.name }}" />
+            <img *ngIf="product.image" [src]="product.image" alt="{{ product.name }}" />
+            <!-- <img *ngIf="product.image" [src]="'data:image/png;base64,' + product.image" alt="{{ product.name }}" /> -->
+            <!-- <img [src]="'data:image/jpeg;base64,' + product.image" alt="{{ product.name }}" /> -->
           </div>
           <div class="product-details">
-            <div *ngIf="product">
-              <img *ngIf="product.image" [src]="'data:image/png;base64,' + product.image" alt="{{ product.name }}" />
-            </div>
             <h3>{{ product.name }}</h3>
             <p><strong>College:</strong> {{ product.collegeName }}</p>
             <p><strong>Description:</strong> {{ product.description }}</p>
@@ -32,7 +31,8 @@
           </div>
         </li>
       </ul>
-      <div *ngIf="products.length==0">
+      
+      <div *ngIf="productsWithImages.length==0">
             Add Product To Sell
       </div>
     </div>

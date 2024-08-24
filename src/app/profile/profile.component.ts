@@ -16,7 +16,9 @@ export class ProfileComponent implements OnInit{
     this.onClick();
   }
   userEmail = localStorage.getItem('userEmail');
-  products: any[] = [];
+  productsImage: any[] = [];
+  products : any[] = [];
+  productsWithImages: any[] = [];
 
   onClick() {
     const email = localStorage.getItem('userEmail');
@@ -26,7 +28,17 @@ export class ProfileComponent implements OnInit{
         async (res: any) => {
           console.log("Rahul");
           console.log(res);
-          console.log(res.allMyProducts);
+          console.log(res.stringImageAllMyProducts);
+
+          // Combine products and images
+          this.productsWithImages = res.stringImageAllMyProducts.map((product: any) => {
+            return {
+              ...product._doc,
+               image: `data:image/png;base64,${product.image}`
+            };
+          });
+
+          console.log(this.productsWithImages);
         },
         (err: any) => {
           console.error('Error fetching products', err);

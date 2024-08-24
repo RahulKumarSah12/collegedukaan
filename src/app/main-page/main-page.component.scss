@@ -325,42 +325,6 @@ ng-template p {
 
 
 
-// .carousel {
-//   overflow: hidden;
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .carousel-track-container {
-//   overflow: hidden;
-//   width: 100%;
-//   display: flex;
-//   justify-content: center;
-// }
-
-// .carousel-track {
-//   display: flex;
-//   transition: transform 1s ease-in;
-//   width: calc(200px * 8); /* Adjust width based on the number of items */
-// }
-
-// .carousel-slide {
-//   width: 200px; /* Adjust width as necessary */
-//   height: 40px;
-//   flex-shrink: 0;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   border: 1px solid #ccc;
-//   border-radius: 4px;
-//   margin: 0 5px;
-// }
-
-
-
-
 
 .carousel {
   overflow: hidden;
@@ -407,6 +371,6 @@ ng-template p {
 .carousel-slide:hover {
   outline: none;
   border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  box-shadow: 10 10 5px rgba(0, 123, 255, 0.5);
   /* Add other styles as needed */
 }
