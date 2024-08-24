@@ -42,9 +42,11 @@ router.post("/createSeller", async (req, res) => {
     else{
         try{
             const user = await Otpbase.findOne({ email });
-            if (user) {
+           // if (user) {
             const serverStoredOtp = user.secret;
             const isValid = userGivenOtp === serverStoredOtp;
+            console.log("isvalid >>",isValid)
+    
             if (isValid) {
                 console.log("OTP is valid!");
                 await User.findOneAndUpdate(
@@ -63,7 +65,7 @@ router.post("/createSeller", async (req, res) => {
                   await newSeller.save();
                     
                 return res.status(201).json({msg : "Seller Created",Sellertoken});
-                }}
+                }//}
             else {
                     console.log("Invalid OTP.");
                     return res.status(400).json("OTP is Invalid");
