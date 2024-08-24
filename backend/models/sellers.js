@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const sellerSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    //required: true,
   },
   phone: {
     type: String,

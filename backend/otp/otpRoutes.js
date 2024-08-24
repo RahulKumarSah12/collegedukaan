@@ -33,8 +33,8 @@ router.post("/getOtp", async (req, res) => {
     }
 });
 
-router.post("/checkOtp", async (req, res) => {
-    const { otp: userGivenOtp, email,phone,location,name } = req.body;
+router.post("/createSeller", async (req, res) => {
+    const { otp: userGivenOtp, email,phone,location,name } = req.body;   
     const x = await User.findOne({email})
     console.log("here is the id type and id>>>>>",typeof(x._id),">>>>>",x._id);
     if(x.role === "Seller"){
