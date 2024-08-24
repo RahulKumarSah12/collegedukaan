@@ -1,40 +1,18 @@
-const {Sellers} = require("../models/sellersDb");
+const User = require("../models/User")
 
-async function checkSeller(req, res) {
-  try {
+async function checkisSeller(req,res) {
     const {email} = req.body;
-
-    
-    const result = await Sellers.findOne({email});
-    if (result) {
-
-        console.log("there is user");
-        return res.json({
-            exist:1
-        })
-
-    //    return res.json({
-    //     msg:"You are already a seller!",
-    //     success: True
-    //   });
-    } else {
-      try {
-
-        return res.status(201).json({
-          msg:"Not a Seller.",
-          exist:0,
-          success: true,
-          user: "new Seller found",
-        });
-      } catch (err) {
-        console.log("err occ ", err);
-      }
+    try{
+        const result = await User.findOne({ email});
+        if(result.role == 'Seller'){
+            res.status(201).json({msg : `There is a seller as ${email}`,exist: 1})
+        }else{
+            res.status(201).json({msg : `${email} is not a Seller`,exist: 0})
+        }
+    }catch(err){
+        console.log("error searching for the mail ID", err);
     }
-  } catch (err) {
-    console.log("error here");
-  }
+    
 }
 
-//checkandSignup("newuser1","kmewrvmvp")
-
-module.exports = checkSeller;
+module.exports = {checkisSeller}
