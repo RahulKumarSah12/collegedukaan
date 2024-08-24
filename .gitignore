@@ -43,4 +43,4 @@ Thumbs.db
 
 # Environment variable files
 /backend/.env
-/backend/node_modules
+

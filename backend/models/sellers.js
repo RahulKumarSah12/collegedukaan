@@ -19,9 +19,9 @@ const sellerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  products:  [{
-    type: mongoose.Schema.Types.ObjectId,
-  }]
+  products:  [
+    {type: Number}
+  ]
 
 });
 

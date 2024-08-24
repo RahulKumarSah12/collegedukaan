@@ -12,12 +12,16 @@ const { default: mongoose } = require("mongoose");
 const { checkisSeller } = require("./controllers/checkSeller.js");
 const router = require("./otp/otpRoutes.js");
 const { chkSellerToken } = require("./middleware/checkSellerToken.js");
+const { handleProduct } = require("./controllers/productHandler.js");
+const { getAllProducts } = require("./controllers/getAllProducts.js");
+const { getMyProducts } = require("./controllers/getMyProducts.js");
 
 const app = express();
 app.use(cors());
 app.use("/", otpRoutes);
 app.use(express.static(path.join(__dirname, "ecomproject")));
 app.use(express.json());
+app.set('json spaces', 5);
 
 
 dotenv.config();
@@ -35,8 +39,10 @@ app.get("/", (req, res) => {
 
 app.post("/signup", checkandSignup);
 app.post("/login", checkUserExists, login);
-app.post("/isSeller",checkisSeller)   //checkToken,
-app.post("/addProduct",chkSellerToken)
+app.post("/isSeller",checkToken,checkisSeller)   //checkToken,            reqbody email
+app.post("/addProduct",chkSellerToken,handleProduct)   //chkSellerToken,           req all fields 
+app.get("/products",checkToken,getAllProducts) //checkToken,
+app.post("/myProducts",chkSellerToken,getMyProducts)  //checkSellerToken
 
 
 app.listen(9000, () => {
