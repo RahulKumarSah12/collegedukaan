@@ -14,7 +14,7 @@ function chkSellerToken(req, res, next) {
       return res.status(401).json({ message: 'Invalid token' });
     }
 
-    if (decoded.role !== 'seller') {
+    if (decoded.role !== 'Seller') {
         console.log("Not a seller");
         return res.status(403).json({ message: 'Access denied: Not a seller' });
       }
