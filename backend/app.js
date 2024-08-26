@@ -16,6 +16,8 @@ const { handleProduct } = require("./controllers/productHandler.js");
 const { getAllProducts } = require("./controllers/getAllProducts.js");
 const { getMyProducts } = require("./controllers/getMyProducts.js");
 const { deleteProduct } = require("./controllers/deleteProducts.js");
+const { updateProduct } = require("./controllers/updateProducts.js");
+const { editProduct } = require("./controllers/editProducts.js");
 
 const app = express();
 app.use(cors());
@@ -45,6 +47,8 @@ app.post("/addProduct",chkSellerToken,handleProduct)   //chkSellerToken,        
 app.get("/products",checkToken,getAllProducts) //checkToken,
 app.post("/myProducts",chkSellerToken,getMyProducts)  //checkSellerToken
 app.post("/deleteProduct",deleteProduct)
+app.post("/updateProduct",updateProduct)
+app.post("/editProducts",editProduct)
 
 
 app.listen(9000, () => {

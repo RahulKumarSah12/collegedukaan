@@ -38,7 +38,7 @@ const productDataScema = new mongoose.Schema({
 
 });
 
-const ProductData = new mongoose.model("ProductData", productDataScema);
+const ProductData = mongoose.model("ProductData", productDataScema); //add new mongoose if possible
 
 module.exports = {ProductData};
 //{name: 'Shoe', description: 'Good shoe very good', price: 100, stock: 2}

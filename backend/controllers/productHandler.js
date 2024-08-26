@@ -20,7 +20,7 @@ async function handleProduct(req, res) {
         collegeName,
         location,
         productId,
-        image: x[0].Location,
+        image: x[0].Location,  //Location is basically image string here
       });
       newProductData.save();
 
