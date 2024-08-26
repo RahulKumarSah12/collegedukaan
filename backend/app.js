@@ -15,6 +15,7 @@ const { chkSellerToken } = require("./middleware/checkSellerToken.js");
 const { handleProduct } = require("./controllers/productHandler.js");
 const { getAllProducts } = require("./controllers/getAllProducts.js");
 const { getMyProducts } = require("./controllers/getMyProducts.js");
+const { deleteProduct } = require("./controllers/deleteProducts.js");
 
 const app = express();
 app.use(cors());
@@ -43,6 +44,7 @@ app.post("/isSeller",checkToken,checkisSeller)   //checkToken,            reqbod
 app.post("/addProduct",chkSellerToken,handleProduct)   //chkSellerToken,           req all fields 
 app.get("/products",checkToken,getAllProducts) //checkToken,
 app.post("/myProducts",chkSellerToken,getMyProducts)  //checkSellerToken
+app.post("/deleteProduct",deleteProduct)
 
 
 app.listen(9000, () => {
