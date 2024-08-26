@@ -36,7 +36,7 @@ async function handleProduct(req, res) {
   
   
         console.log("saved successfully to mongoDB>>>>>");;
-        res.send("all done")
+        res.json({msg:"product added and all done."})
      })();
 
 
