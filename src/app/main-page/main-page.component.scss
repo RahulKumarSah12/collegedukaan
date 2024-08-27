@@ -86,7 +86,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(57, 57, 57, 0.187);
+    // background: rgba(57, 57, 57, 0.187);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(6px);
     z-index: 999;
     transition: opacity 0.3s ease;
@@ -104,13 +105,38 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     width: 90%;
-    max-width: 400px;
+    max-width: 420px;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
   
+.otpemail, .otp-input, .phone-input, .location-input{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
 
+
+.otpemail:focus , .otp-input:focus, .phone-input:focus, .location-input:focus{
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+small {
+  color: red;
+  font-size: 12px;
+}
+
+.custom-otp-input {
+  display: flex;
+  margin-bottom: 10px;
+}
   
-  .MakeMeASeller {
+  .MakeMeASeller , .VerifyOtpButton{
     width: 100%;
     padding: 10px;
     background: #007bff;
@@ -195,6 +221,8 @@
 .product-card:hover {
   transform: translateY(-5px); /* Slight lift on hover */
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+  background-color: rgba(184, 240, 255, 0.379);
+  cursor: pointer;
 }
 
 /* Styling for product information */

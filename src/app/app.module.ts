@@ -20,6 +20,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from './loader/loader.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { NgOtpInputModule } from  'ng-otp-input';
+import { ProductEditModalComponent } from './product-edit-modal/product-edit-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +40,7 @@ import { CarouselComponent } from './carousel/carousel.component';
          LoaderComponent,
          ProfileComponent,
          CarouselComponent,
+         ProductEditModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,9 +50,11 @@ import { CarouselComponent } from './carousel/carousel.component';
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
-
-
+    MatProgressSpinnerModule,
+    NgOtpInputModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     SignupCreateAccountService,

@@ -11,7 +11,7 @@ export class SignupCreateAccountService {
 
   constructor(private http: HttpClient) { }
 
-  createAccount(accountData: { name: string, email: string, password: string }): Observable<any> {
+  createAccount(accountData: { name: string, email: string, password: string}): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/signup`, accountData);
   }
 
@@ -19,24 +19,36 @@ export class SignupCreateAccountService {
     return this.http.post<any>(`${this.apiUrl}/login`, loginData)
   }
 
-  makeSeller(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/createSeller`, data);
+  sendOtp(email: any): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/getOtp`, {email});
+  }
+
+  verifyOtp(data: { otp: string; email: string; phone: number; location: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/createSeller`, data);
   }
 
   checkSeller(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/checkSeller`, data);
+    return this.http.post(`${this.apiUrl}/isSeller`, data);
   }
 
   addProduct(formData: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/allproducts`, formData);
+    return this.http.post(`${this.apiUrl}/addProduct`, formData);
   }
 
   getproducts(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getproducts`);
+    return this.http.get(`${this.apiUrl}/products`);
   }
 
   getallMyProducts(email:any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/getallMyProducts`, email);
+    return this.http.post(`${this.apiUrl}/myProducts`, email);
+  }
+
+  deleteProduct(reqBody:any){
+    return this.http.post(`${this.apiUrl}/deleteProduct`, reqBody);
+  }
+
+  updateProduct(reqBody:any){
+    return this.http.post(`${this.apiUrl}/editProducts`, reqBody);
   }
 
 }

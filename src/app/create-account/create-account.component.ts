@@ -38,7 +38,9 @@ export class CreateAccountComponent {
             verticalPosition: 'top' // Position vertically
           });
           const email = this.createAccountForm.get('email')?.value;
+          const name = this.createAccountForm.get('name')?.value;
           localStorage.setItem('userEmail', email); // Store email in local storage
+          localStorage.setItem('userName', name);
           this.createAccountForm.reset(); // Reset all the input fields
           this.route.navigate(['/login']);
         },

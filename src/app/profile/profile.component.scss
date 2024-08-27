@@ -107,3 +107,122 @@
     color: #555;
   }
   
+
+  .product-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .product-actions button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .deleteBtn{
+    color: rgb(247, 50, 50);
+  }
+
+  .editBtn{
+    color: #28a745;
+  }
+  .deleteBtn:hover{
+    color: rgb(215, 9, 9);
+  }
+
+  .editBtn:hover{
+    color: #218838;
+  }
+  
+
+  
+  .product-actions .fas {
+    font-size: 20px;
+  }
+  
+
+
+
+
+  /* General styling for the modal overlay */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  // background: rgba(57, 57, 57, 0.187);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.modal-content-inside{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+}
+
+/* Header styling for modal */
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Styling for modal actions container */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  width: 100%;
+}
+
+/* Button styling in modal */
+.modal-actions .button {
+  width: 45%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: #ffffff;
+}
+
+.modal-actions .button.go-back {
+  background-color: #6c757d; /* Dark gray */
+}
+
+.modal-actions .button.go-back:hover {
+  background-color: #5a6268; /* Slightly darker gray */
+}
+
+.modal-actions .button.my-products {
+  background-color: rgb(247, 50, 50); /* Green */
+}
+
+.modal-actions .button.my-products:hover {
+  background-color: rgb(215, 9, 9); /* Darker green */
+}

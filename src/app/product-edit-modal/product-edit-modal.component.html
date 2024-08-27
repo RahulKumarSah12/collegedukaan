@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="form-container">
+      <h2>Edit Product</h2>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <!-- Product Name -->
+          <div class="form-group">
+            <label for="name">Product Name:</label>
+            <input id="name" formControlName="name" type="text" />
+            <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-message">
+              <small *ngIf="productForm.get('name')?.errors?.['required']">Product name is required.</small>
+              <small *ngIf="productForm.get('name')?.errors?.['minlength']">Product name must be at least 3 characters long.</small>
+            </div>
+          </div>
+  
+          <!-- Price -->
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input id="price" formControlName="price" type="number" step="0.01" />
+            <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-message">
+              <small *ngIf="productForm.get('price')?.errors?.['required']">Price is required.</small>
+              <small *ngIf="productForm.get('price')?.errors?.['min']">Price must be greater than 0.</small>
+            </div>
+          </div>
+          
+          <!-- Description -->
+          <div class="form-group description-group">
+            <label for="description">Description:</label>
+            <textarea id="description" formControlName="description"></textarea>
+            <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="error-message">
+              <small *ngIf="productForm.get('description')?.errors?.['required']">Description is required.</small>
+              <small *ngIf="productForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters long.</small>
+            </div>
+          </div>
+        </div>
+  
+        <!-- College Name -->
+        <div class="form-group">
+          <label for="collegeName">College Name:</label>
+          <select id="collegeName" formControlName="collegeName">
+            <option *ngFor="let college of colleges" [value]="college">{{ college }}</option>
+          </select>
+          <div *ngIf="productForm.get('collegeName')?.invalid && productForm.get('collegeName')?.touched" class="error-message">
+            <small *ngIf="productForm.get('collegeName')?.errors?.['required']">College name is required.</small>
+          </div>
+        </div>
+  
+        <!-- Location -->
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input id="location" formControlName="location" type="text" />
+          <div *ngIf="productForm.get('location')?.invalid && productForm.get('location')?.touched" class="error-message">
+            <small *ngIf="productForm.get('location')?.errors?.['required']">Location is required.</small>
+          </div>
+        </div>
+  
+        <!-- Image Upload -->
+        <div class="form-group">
+          <label for="image">Upload Image:</label>
+          <input id="image" type="file" accept="image/*" (change)="onFileChange($event)" />
+          <div *ngIf="productForm.get('image')?.invalid && productForm.get('image')?.touched" class="error-message">
+            <small *ngIf="productForm.get('image')?.errors?.['required']">Image is required.</small>
+          </div>
+        </div>
+  
+        <!-- <button type="submit" [disabled]="productForm.invalid">Update Product</button> -->
+  
+        <div class="button-container">
+          <button type="button" class="go-back" (click)="goBack()">Go Back</button>
+          <button type="submit" [disabled]="productForm.invalid">Update Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

@@ -26,8 +26,34 @@
 
 <!-- Modal Content -->
 <div class="modal-content" *ngIf="modalVisible">
-    <button type="submit" class="MakeMeASeller" (click)="makeMeASeller()">Make Me a Seller</button>
+  <form *ngIf="!showOtpForm" [formGroup]="form" (ngSubmit)="getOtp()">
+    <input id="email" class="otpemail" formControlName="email" placeholder="Enter email to get OTP"/>
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      <small *ngIf="form.get('email')?.errors?.['required']">This field is required.</small>
+      <small *ngIf="form.get('email')?.errors?.['email']">Invalid email format.</small>
+    </div>
+    <button type="submit" class="MakeMeASeller" [disabled]="form.invalid">Send OTP</button>
+  </form>
+
+  <form *ngIf="showOtpForm" [formGroup]="otpForm" (ngSubmit)="verifyOtp()">
+    <ng-otp-input class="custom-otp-input" (onInputChange)="onOtpChange($event)"  [config]="{length:6}" formControlName="otp"></ng-otp-input>
+  
+    <input id="phone" class="phone-input" formControlName="phone" placeholder="Enter phone number"/>
+    <div *ngIf="otpForm.get('phone')?.invalid && otpForm.get('phone')?.touched">
+      <small *ngIf="otpForm.get('phone')?.errors?.['required']">This field is required.</small>
+      <small *ngIf="otpForm.get('phone')?.errors?.['pattern']">Invalid phone number format.</small>
+    </div>
+  
+    <input id="location" class="location-input" formControlName="location" placeholder="Enter address"/>
+    <div *ngIf="otpForm.get('location')?.invalid && otpForm.get('location')?.touched">
+      <small *ngIf="otpForm.get('location')?.errors?.['required']">This field is required.</small>
+    </div>
+  
+    <button type="submit" class="VerifyOtpButton" [disabled]="otpForm.invalid">Verify OTP</button>
+  </form>
+  
 </div>
+
 
 
 
@@ -70,7 +96,7 @@
       <div class="product-grid">
         <div *ngFor="let product of products" class="product-card">
           <div class="product-image">
-            <img [src]="'data:image/jpeg;base64,' + product.image" alt="{{ product.name }}" />
+            <img src="{{product.image}}" alt="{{ product.name }}" />
           </div>
           <div class="product-info">        
             <h3>{{ product.name | titleCase }}</h3>
