@@ -125,9 +125,13 @@
 
   .noProducts{
     // border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     font-size: 30px;
-    padding: 80px;
+    padding: 20px;
   }
   
   .noProducts p{
@@ -135,6 +139,22 @@
     text-align: center;
     font-size: 30px;
     padding: 30px;
+  }
+
+  .btn{
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+  }
+
+  .btn:hover {
+    background-color: #18579a;
+    border: none;
+  }
+
+  .btn a{
+    text-decoration: none;
+    color: white;
   }
 
   .product-actions {
