@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "rahul-86e35",
+    "stazing": "rahul-86e35",
+    "staging": "rahul-86e35"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

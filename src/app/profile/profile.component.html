@@ -8,13 +8,16 @@
   </nav>
 
 
-<div class="container">
+  <div class="container">
     <h1>Seller Profile</h1>
     <div class="email">
-      <strong>Email:</strong> {{ selllerEmail }}
+      <strong>Email:</strong> {{ sellerEmail }}
     </div>
     <div class="products">
-      <h2>My Products</h2>
+      <div class="products-header">
+        <h2>My Products</h2>
+        <span class="product-count">Total Number of Products: {{ products.length }}</span>
+      </div>
       <ul>
         <li *ngFor="let product of products">
           <div class="product-image">
@@ -28,30 +31,32 @@
             <p><strong>Price:</strong> {{ product.price | currency }}</p>
           </div>
           <div class="product-actions">
-            <button (click)="editProduct(product.productId)">
-              <i class="fas fa-edit editBtn"></i> <!-- Font-awesome icon for editing -->
+            <button (click)="openEditModal(product, product.productId)">
+              <i class="fas fa-edit editBtn"></i>
             </button>
             <button (click)="deleteProduct(product.productId)">
-              <i class="fas fa-trash deleteBtn"></i> <!-- Font-awesome icon for deleting -->
+              <i class="fas fa-trash deleteBtn"></i>
             </button>
           </div>
         </li>
       </ul>
-      
-      
-      <div *ngIf="products.length==0">
-            Add Product To Sell
+  
+      <div *ngIf="products.length == 0" class="noProducts">
+        <video width="200" autoplay loop muted>
+          <source src="assets/money.mp4" type="video/mp4" />
+        </video>
+        <p>Add Products To Sell and Earn</p>
       </div>
     </div>
   </div>
   
+  
 
 
 <!--Delete Modal HTML -->
-
 <div *ngIf="isModalVisible" class="modal-overlay" (click)="closeModal()"></div>
 
-  <div class="modal-content" *ngIf="isModalVisible">
+  <div class="modal-content-delete" *ngIf="isModalVisible">
     <div class="modal-content-inside">
       <h2>Confirmation</h2>
       <p>Do you want to delete this product?</p>
@@ -62,3 +67,93 @@
     </div>
   </div>
 
+
+
+
+<!-- Edit Modal -->
+<div *ngIf="isEditModalVisible" class="modal-overlay-edit" (click)="closeEditModal()"></div>
+
+<div class="modal-content-edit" *ngIf="isEditModalVisible">
+  <div class="modal-content-inside-edit">
+    <div class="editContainer">
+      <div class="form-container">
+        <h2>Edit Product</h2>
+        <form [formGroup]="editProductForm" (ngSubmit)="onSave()">
+          <div class="form-row">
+            <!-- Product Name -->
+            <div class="form-group">
+              <label for="name">Product Name:</label>
+              <input id="name" formControlName="name" type="text" />
+              <div *ngIf="editProductForm.get('name')?.invalid && editProductForm.get('name')?.touched" class="error-message">
+                <small *ngIf="editProductForm.get('name')?.errors?.['required']">Product name is required.</small>
+                <small *ngIf="editProductForm.get('name')?.errors?.['minlength']">Product name must be at least 3 characters long.</small>
+              </div>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+              <label for="price">Price:</label>
+              <input id="price" formControlName="price" type="number" step="0.01" />
+              <div *ngIf="editProductForm.get('price')?.invalid && editProductForm.get('price')?.touched" class="error-message">
+                <small *ngIf="editProductForm.get('price')?.errors?.['required']">Price is required.</small>
+                <small *ngIf="editProductForm.get('price')?.errors?.['min']">Price must be greater than 0.</small>
+              </div>
+            </div>
+            
+            <!-- Description -->
+            <div class="form-group description-group">
+              <label for="description">Description:</label>
+              <textarea id="description" formControlName="description"></textarea>
+              <div *ngIf="editProductForm.get('description')?.invalid && editProductForm.get('description')?.touched" class="error-message">
+                <small *ngIf="editProductForm.get('description')?.errors?.['required']">Description is required.</small>
+                <small *ngIf="editProductForm.get('description')?.errors?.['minlength']">Description must be at least 10 characters long.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- College Name -->
+          <div class="form-group">
+            <label for="collegeName">College Name:</label>
+            <select id="collegeName" formControlName="collegeName">
+              <option *ngFor="let college of colleges" [value]="college">{{ college }}</option>
+            </select>
+            <div *ngIf="editProductForm.get('collegeName')?.invalid && editProductForm.get('collegeName')?.touched" class="error-message">
+              <small *ngIf="editProductForm.get('collegeName')?.errors?.['required']">College name is required.</small>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="form-group">
+            <label for="location">Location:</label>
+            <input id="location" formControlName="location" type="text" />
+            <div *ngIf="editProductForm.get('location')?.invalid && editProductForm.get('location')?.touched" class="error-message">
+              <small *ngIf="editProductForm.get('location')?.errors?.['required']">Location is required.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Current Image:</label>
+            <div *ngIf="imageUrl">
+              <img [src]="imageUrl" alt="Product Image" class="current-image" width="200px"/>
+            </div>
+          </div>
+
+          <!-- Image Upload -->
+          <div class="form-group">
+            <label for="image">Upload New Image:</label>
+            <input id="image" type="file" accept="image/*" (change)="onFileChange($event)" />
+            <div *ngIf="editProductForm.get('image')?.invalid && editProductForm.get('image')?.touched" class="error-message">
+              <small *ngIf="editProductForm.get('image')?.errors?.['required']">Image is required.</small>
+            </div>
+          </div>
+
+        
+          <div class="button-container">
+            <button type="button" class="go-back" (click)="closeEditModal()">Cancel</button>
+            <button type="submit">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

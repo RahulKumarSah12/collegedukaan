@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "dist/ecomproject",
+    "site": "rahul-86e35",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
