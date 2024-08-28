@@ -3,16 +3,15 @@
       <h2>Sign In</h2>
       
       <div>
-        <label for="contactInfo">Email or mobile phone number:</label>
+        <label for="contactInfo">Email:</label>
         <input 
           id="contactInfo" 
           formControlName="contactInfo" 
-          (keypress)="restrictContactInfo($event)" 
           maxlength="50" 
         />
         <div *ngIf="loginForm.get('contactInfo')?.invalid && loginForm.get('contactInfo')?.touched">
           <small *ngIf="loginForm.get('contactInfo')?.errors?.['required']">This field is required. </small>
-          <small *ngIf="loginForm.get('contactInfo')?.errors?.['invalidContactInfo']">Invalid email or phone number (must be 10 digits for phone).</small>
+          <small *ngIf="loginForm.get('contactInfo')?.errors?.['email']">Invalid email format. </small>
         </div>
       </div>
   

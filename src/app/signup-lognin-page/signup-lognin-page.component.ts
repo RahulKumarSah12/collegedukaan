@@ -14,29 +14,11 @@ export class SignupLogninPageComponent {
 
   constructor(private fb: FormBuilder, private myService: SignupCreateAccountService, private route: Router, private snackBar: MatSnackBar) {
     this.loginForm = this.fb.group({
-      contactInfo: ['', [Validators.required, this.emailOrPhoneValidator]],
+      contactInfo: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  emailOrPhoneValidator(control: any) {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    const phonePattern = /^\d{10}$/; // Regex for exactly 10 digits
-    if (emailPattern.test(control.value) || phonePattern.test(control.value)) {
-      return null;
-    } else {
-      return { invalidContactInfo: true };
-    }
-  }
-
-  restrictContactInfo(event: KeyboardEvent) {
-    const input = event.target as HTMLInputElement;
-    const value = input.value;
-    const isDigit = /^\d$/.test(event.key);
-    if (isDigit && value.length >= 10) {
-      event.preventDefault();
-    }
-  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {

@@ -89,11 +89,11 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router, private myService: SignupCreateAccountService, private snackBar: MatSnackBar, private dialog: MatDialog, private fb: FormBuilder) {
     this.editProductForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      price: [0, [Validators.required, Validators.min(0.01)]],
-      description: ['', [Validators.required, Validators.minLength(10)]],
-      collegeName: ['', Validators.required],
-      location: ['', Validators.required],
+      name: ['', [Validators.minLength(3)]],
+      price: [0, [Validators.min(0.01)]],
+      description: ['', [Validators.minLength(10)]],
+      collegeName: [''],
+      location: [''],
       image: [null]
     });
   }
@@ -183,10 +183,13 @@ export class ProfileComponent implements OnInit {
 
   toBeEditId: any;
   imageUrl: any;
+  toBeEditProducts : any;
   async openEditModal(product: any, id: any) {
     console.log(product);
     console.log(id);
     this.toBeEditId = id;
+    this.toBeEditProducts = product;
+    console.log(this.toBeEditProducts);
     this.isEditModalVisible = true;
   
     // Patch the form with other values
@@ -217,9 +220,34 @@ export class ProfileComponent implements OnInit {
       this.editProductForm.get('image')?.updateValueAndValidity();
     }
   }
+  
 
   onSave() {
     console.log(this.editProductForm.value);
+    console.log(this.toBeEditProducts);
+
+    if(!this.editProductForm.dirty){
+      this.snackBar.open('You have not made any changes!', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
+      return ;
+    }
+
+    if(this.editProductForm.get('name')?.value==this.toBeEditProducts.name &&
+      this.editProductForm.get('price')?.value==this.toBeEditProducts.price &&
+      this.editProductForm.get('collegeName')?.value==this.toBeEditProducts.collegeName && 
+      this.editProductForm.get('description')?.value==this.toBeEditProducts.description &&
+      this.editProductForm.get('location')?.value==this.toBeEditProducts.location && this.editProductForm.get('image')?.value==null){
+        this.snackBar.open('You have not made any changes!', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
+        });
+        return ;
+    }
+
     const sellerEmail = localStorage.getItem('userEmail');
     const productId = this.toBeEditId;
     const formData = new FormData();
@@ -277,87 +305,7 @@ export class ProfileComponent implements OnInit {
 
 
 
-  // async onSave() {
-  //   const sellerEmail = localStorage.getItem('userEmail');
-  //   const productId = this.toBeEditId;
-  //   const formData = new FormData();
-  
-  //   // Check if an image is selected in the form
-  //   const imgfile = this.editProductForm.get('image')?.value;
-  //   console.log(imgfile);
 
-  //   if (imgfile) {
-  //     formData.append('file', imgfile);
-  //     console.log(imgfile);
-  //   }
-  //   else{
-  //     try {
-  //       console.log(this.imageUrl);
-  //       // Fetch the image from the URL and convert it to a Blob only if no new image is selected
-        
-  //       const response = await fetch(this.imageUrl, { mode: 'cors' });
-  //       const blob = await response.blob();
-       
-  //       console.log("Blob");
-  //       console.log(blob);
-
-  //       // Extract the image name from the URL
-  //       const fullImageName = this.imageUrl.split('/').pop();
-  //       const imageName = fullImageName?.split('-').pop();
-  
-  //       // Create a default File object from the Blob
-  //       let defaultFile = new File([blob], imageName || 'image.png', { type: blob.type });
-  //       console.log("Default");
-  //       console.log(defaultFile);
-  
-  //       formData.append('file', defaultFile);
-  //     } catch (error) {
-  //       console.error('Error fetching image:', error);
-  //       this.snackBar.open('Error fetching the image. Please try again.', 'Close', {
-  //         duration: 3000,
-  //         horizontalPosition: 'right',
-  //         verticalPosition: 'top',
-  //       });
-  //       return; // Exit the function if there's an error
-  //     }
-  //   }
-  
-
-  
-  //   // Append form fields except the file separately
-  //   formData.append('name', this.editProductForm.get('name')?.value);
-  //   formData.append('description', this.editProductForm.get('description')?.value);
-  //   formData.append('price', this.editProductForm.get('price')?.value.toString());
-  //   formData.append('collegeName', this.editProductForm.get('collegeName')?.value);
-  //   formData.append('location', this.editProductForm.get('location')?.value);
-  //   formData.append('productId', productId);
-  
-  //   if (sellerEmail) {
-  //     formData.append('email', sellerEmail);
-  //   }
-  
-  //   this.myService.updateProduct(formData).subscribe(
-  //     response => {
-  //       console.log('Product updated successfully:', response);
-  //       this.snackBar.open('Product updated successfully!', 'Close', {
-  //         duration: 3000,
-  //         horizontalPosition: 'right',
-  //         verticalPosition: 'top'
-  //       });
-  //       this.router.navigate(['profile']);
-  //       this.closeEditModal();
-  //       this.getSellerProductsList();
-  //     },
-  //     error => {
-  //       console.error('Error updating product:', error);
-  //       this.snackBar.open('Error updating product', 'Close', {
-  //         duration: 3000,
-  //         horizontalPosition: 'right',
-  //         verticalPosition: 'top'
-  //       });
-  //     }
-  //   );
-  // }
 
 
 
