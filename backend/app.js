@@ -18,14 +18,14 @@ const { getMyProducts } = require("./controllers/getMyProducts.js");
 const { deleteProduct } = require("./controllers/deleteProducts.js");
 const { updateProduct } = require("./controllers/updateProducts.js");
 const { editProduct } = require("./controllers/editProducts.js");
+const { isFilePresent } = require("./middleware/isFileAvl.js");
 
 const app = express();
 app.use(cors());
 app.use("/", otpRoutes);
 app.use(express.static(path.join(__dirname, "ecomproject")));
 app.use(express.json());
-app.set('json spaces', 5);
-
+app.set("json spaces", 5);
 
 dotenv.config();
 
@@ -42,14 +42,13 @@ app.get("/", (req, res) => {
 
 app.post("/signup", checkandSignup);
 app.post("/login", checkUserExists, login);
-app.post("/isSeller",checkToken,checkisSeller)   //checkToken,            reqbody email
-app.post("/addProduct",chkSellerToken,handleProduct)   //chkSellerToken,           req all fields 
-app.get("/products",checkToken,getAllProducts) //checkToken,
-app.post("/myProducts",chkSellerToken,getMyProducts)  //checkSellerToken
-app.post("/deleteProduct",deleteProduct)
-app.post("/updateProduct",updateProduct)
-app.post("/editProducts",editProduct)
-
+app.post("/isSeller", checkToken, checkisSeller); //checkToken,            reqbody email
+app.post("/addProduct", chkSellerToken, handleProduct); //chkSellerToken,           req all fields
+app.get("/products", checkToken, getAllProducts); //checkToken,
+app.post("/myProducts", chkSellerToken, getMyProducts); //checkSellerToken
+app.post("/deleteProduct", deleteProduct);
+app.post("/updateProduct", updateProduct);
+app.post("/editProducts", isFilePresent, editProduct); //isFilePresent,//,editProduct
 
 app.listen(9000, () => {
   console.log("http://localhost:9000");
