@@ -42,13 +42,13 @@
       </ul>
   
       <div *ngIf="products.length == 0" class="noProducts">
-        <video width="200" autoplay loop muted>
-          <source src="assets/money.mp4" type="video/mp4" />
-        </video>
-        <p>Add Products To Sell and Earn</p>
+        <p>You have not added any product!</p>
         <div class="btn">
           <a class="addproductform" [routerLink]="['/product-add-form']">Add Product & Sell</a>
         </div>
+        <video width="200" autoplay loop muted>
+          <source src="assets/money.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   </div>
@@ -160,3 +160,7 @@
     </div>
   </div>
 </div>
+
+
+
+<app-loader *ngIf="isLoading"></app-loader>

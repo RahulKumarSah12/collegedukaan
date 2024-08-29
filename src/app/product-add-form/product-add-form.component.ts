@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductAddFormComponent {
   productForm!: FormGroup;
   colleges: string[] = [];
+  isLoading = false;
 
   constructor(private fb: FormBuilder, private router: Router, private myService: SignupCreateAccountService, private snackBar: MatSnackBar) {
 
@@ -101,6 +102,7 @@ export class ProductAddFormComponent {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
     const sellerEmail = localStorage.getItem('userEmail');
     if (this.productForm.valid) {
       const formData = new FormData();
@@ -135,15 +137,18 @@ export class ProductAddFormComponent {
             horizontalPosition: 'right', // Position horizontally
             verticalPosition: 'top' // Position vertically
           });
-          this.router.navigate(['main-page']);
+          this.router.navigate(['profile']);
+          this.isLoading = false;
         },
         error => {
+
           console.error('Error adding product:', error);
           this.snackBar.open('Error adding product', 'Close', {
             duration: 3000,
             horizontalPosition: 'right', // Position horizontally
             verticalPosition: 'top' // Position vertically
           });
+          this.isLoading = false;
         }
       );
     } else {

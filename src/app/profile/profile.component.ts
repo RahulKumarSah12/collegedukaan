@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  isLoading = false;
   colleges: string[] =
     [
       // Indian Institutes of Technology (IITs)
@@ -98,6 +99,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    
     this.getSellerProductsList();
   }
   sellerEmail = localStorage.getItem('userEmail');
@@ -105,6 +107,7 @@ export class ProfileComponent implements OnInit {
   isModalVisible = false;
 
   getSellerProductsList() {
+    this.isLoading = true;
     const email = localStorage.getItem('userEmail');
 
     if (email) {
@@ -112,9 +115,11 @@ export class ProfileComponent implements OnInit {
         async (res: any) => {
           console.log(res.results);
           this.products = res.results;
+          this.isLoading = false;
         },
         (err: any) => {
           console.error('Error fetching products', err);
+          this.isLoading = false;
           return of([]);
         }
       );
@@ -209,6 +214,7 @@ export class ProfileComponent implements OnInit {
     this.isEditModalVisible = false;
   }
 
+  
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -218,6 +224,7 @@ export class ProfileComponent implements OnInit {
         image: file
       });
       this.editProductForm.get('image')?.updateValueAndValidity();
+      console.log("Rahul");
     }
   }
   
@@ -239,7 +246,8 @@ export class ProfileComponent implements OnInit {
       this.editProductForm.get('price')?.value==this.toBeEditProducts.price &&
       this.editProductForm.get('collegeName')?.value==this.toBeEditProducts.collegeName && 
       this.editProductForm.get('description')?.value==this.toBeEditProducts.description &&
-      this.editProductForm.get('location')?.value==this.toBeEditProducts.location && this.editProductForm.get('image')?.value==null){
+      this.editProductForm.get('location')?.value==this.toBeEditProducts.location && 
+      this.editProductForm.get('image')?.value==null){
         this.snackBar.open('You have not made any changes!', 'Close', {
           duration: 3000,
           horizontalPosition: 'right',
